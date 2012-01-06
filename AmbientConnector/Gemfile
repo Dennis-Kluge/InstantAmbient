@@ -1,0 +1,15 @@
+source "http://rubygems.org"
+
+gemspec
+  
+gem "json-jruby"
+
+group :development, :test do
+  gem 'guard'
+  gem 'rspec'
+  gem 'ruby_gntp'
+  gem 'guard-rspec'
+  gem 'guard-livereload'
+end
+  
+  
