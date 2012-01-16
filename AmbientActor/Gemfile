@@ -1,0 +1,12 @@
+source "http://rubygems.org"
+
+# Specify your gem's dependencies in AmbientActor.gemspec
+gemspec
+
+group :development, :test do
+  gem 'guard'
+  gem 'rspec'
+  gem 'ruby_gntp'
+  gem 'guard-rspec'
+  gem 'guard-livereload'
+end
