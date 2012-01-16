@@ -1,0 +1,14 @@
+source "http://rubygems.org"
+
+# Specify your gem's dependencies in AmbientBrain.gemspec
+gemspec
+
+gem 'json'
+
+group :development, :test do
+  gem 'guard'
+  gem 'rspec'
+  gem 'ruby_gntp'
+  gem 'guard-rspec'
+  gem 'guard-livereload'
+end
