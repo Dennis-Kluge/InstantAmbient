@@ -1,1 +1,48 @@
-\chapter{Die Architektur}
+\chapter{Architektur & Technologien}
+
+
+\section{Gesamtarchtitektur}
+
+\section{Aufbau Client}
+\section{Aufbau Backend}
+
+
+\section{Technologien}
+2 Große Bereiche Client und "Backend" (was eine Vielzahl an Komponenten beschreibt)
+
+- allgemeine Übersicht zu den Komponenten und noch mal Workflow wiederholen
+- Namensgebung bzgl Ambient*
+- Übersicht siehe Omnigraffle Sketch 
+
+Anforderungen:
+- sind unterschiedlich und teilweise auch gegensätzlich wg. den Komponenten 
+- leicht verständlich und handhabar auf der User-Seite und dem Client 
+- skalierbar, rock solid im Backend
+
+Kommunikation:
+
+Client
+
+Technologie
+- Android, Java, eventuell CouchDB
+
+AmbientConnector
+
+Technologie
+- JRuby 
+- BlueCove 
+- Blueooth 
+
+AmbientBrain 
+
+Technologie
+- Ruby 
+- Eventmachine
+- AMQP
+
+AmbientActor
+
+Technologie
+- Arduino n paar Bauteile 
+- Ein Ruby Client ebenfalls mit AMPQ
+
