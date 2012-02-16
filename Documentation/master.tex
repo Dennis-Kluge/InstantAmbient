@@ -1,0 +1,134 @@
+\documentclass[11pt, a4paper]{article}
+
+% Test mit dem a5 format
+%\usepackage[a5paper]{geometry}
+
+% Silbentrennung
+\usepackage[ngerman]{babel}
+
+% Umlaute
+\usepackage[utf8]{inputenc}
+
+% Pfeile etc.
+\usepackage{amsmath}
+
+% Absatz Einrückung 
+\setlength{\parindent}{0pt} 
+
+% Silbentrennung
+\usepackage[ngerman]{babel}
+\usepackage[T1]{fontenc}
+
+% Tabellen
+\usepackage{multirow}
+
+%Source Code einfügen
+\usepackage{listings}
+\usepackage{float}
+\usepackage{color}
+\usepackage{textcomp}
+\lstset{numbers=left, numberstyle=\tiny, numbersep=5pt, tabsize=2,showstringspaces=false, basicstyle=\footnotesize }
+
+
+% Bibtex
+\usepackage{natbib}
+
+%\usepackage{amsrefs}
+
+% Verweise in PDF		
+\usepackage{hyperref} 
+\hypersetup{
+	colorlinks,
+	citecolor=black,
+	filecolor=black,
+	linkcolor=black,
+	urlcolor=black,
+	pdftitle={NFC basierte Konfiguration von Lebens- und Arbeitsumgebung},
+	pdfauthor={Swen Hutop, Dennis Kluge},
+	pdfsubject={Forschungsprojekt},
+	pdfproducer={our mac}, % producer of the document
+	pdfkeywords={Auto} {Heim} {Automatisierung}, % list of keywords
+}
+
+% Glossar
+%\usepackage{glossaries}
+%\makeglossaries
+
+% für Bilder
+\usepackage{graphicx}
+
+% index
+%\usepackage{makeidx}
+%\makeindex
+
+\begin{document}
+
+\title{NFC basierte Konfiguration von Lebens- und Arbeitsumgebung}
+\author{Swen Hutop, Dennis Kluge}
+
+%\pagenumbering{Roman}
+
+% Deckblatte
+\input{title}
+
+% Inhaltsverzeichnis
+\tableofcontents
+
+
+\newpage
+%\clearpage\null\vfill
+
+
+% Abstract
+\input{abstract/abstract}
+
+% Alle notwendigen includes
+
+% glossary -  muss als erstes damit die Einträge bekannt sind
+%\vfill\null
+%\clearpage
+\newpage
+
+
+\include{chap1/chap1}
+\include{chap2/chap2}
+\include{chap3/chap3}
+\include{chap4/chap4}
+\include{chap5/chap5}
+\include{chap6/chap6}
+\include{chap7/chap7}
+\include{chap8/chap8}
+\include{chap9/chap9}
+\include{chap10/chap10}
+
+%Anhang
+%\appendix
+
+\newpage
+% Glossar
+%\printglossaries
+%\addcontentsline{toc}{chapter}{Glossar}
+% Abbildungsverzeichnis
+%\listoffigures
+% Abbildungsverzeichnis
+%\chapter{Verzeichnisse}
+%\listoffigures
+%\addcontentsline{toc}{chapter}{Abbildungsverzeichnis}
+%\chapter{Abbildungsverzeichnis}
+
+%Code-Verzeichnis
+%\renewcommand{\lstlistlistingname}{Verzeichnis der Quelltextauszüge}
+%\lstlistoflistings
+%\addcontentsline{toc}{chapter}{Verzeichnis der Quelltextauszüge}
+
+% Bibtex mit der externen Datei bibliography.bib
+%\nocite{*}
+%\bibliography{bibliography}
+%\bibliographystyle{alpha}
+%\addcontentsline{toc}{section}{Literaturverzeichnis}
+
+% Index
+%\clearpage
+%\addcontentsline{toc}{chapter}{Index}
+%\printindex
+\end{document}
