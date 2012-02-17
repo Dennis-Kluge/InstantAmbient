@@ -8,6 +8,28 @@
 
 
 \section{Technologien}
+
+\subsection{NFC}
+NFC
+- grosser Trend 
+- für dieses Szenario geeignet, aber es können dienge wie realtime Configuration nicht bequem abgehandelt werden 
+- große Konfigurationsdateien: zu geringe Datenrate + NDEF-Format ungeeignet 
+- Probleme bei den Implementierungen bei großen Messages => libnfc
+- Libraries auf dem aktuellen Stand
+
+Bluetooth
+- beliebte Technologie 
+- haben nahezu alle Smartphones
+- geeignet für diese Art von Datenübertragung 
+- libraries nicht gepflegt aber verwendbar
+- realtime changes
+- für das proof of concept einfacher zu verwenden
+- noch immer im Sinne von "NFC"
+
+- Entscheidung für Bluetooth
+- das Gesamtkonzept sieht vor den Connector austauschabr zu machen daher kann eine Implementierung von NFC in Zukfunft vorgenommen werden
+
+
 2 Große Bereiche Client und "Backend" (was eine Vielzahl an Komponenten beschreibt)
 
 - allgemeine Übersicht zu den Komponenten und noch mal Workflow wiederholen
@@ -20,12 +42,18 @@ Anforderungen:
 - skalierbar, rock solid im Backend
 
 Kommunikation:
+Bluetooth
+
+ansonsten messaging Systeme -> das muss noch aufgearbeitet werden wahrscheinlich AMQP
 
 Client
 
 Technologie
 - Android, Java, eventuell CouchDB
+- geht nicht einfach
 
+
+- generell Ruby geeignet fürs Prototyping, für Produktivbetrieb eventuell nicht geeignet
 AmbientConnector
 
 Technologie
@@ -34,6 +62,7 @@ Technologie
 - Blueooth 
 
 AmbientBrain 
+- Eventmachine
 
 Technologie
 - Ruby 
@@ -43,6 +72,6 @@ Technologie
 AmbientActor
 
 Technologie
-- Arduino n paar Bauteile 
+- Arduino n paar Bauteile fürs Konzept
 - Ein Ruby Client ebenfalls mit AMPQ
 
