@@ -5,7 +5,7 @@
  * should not be modified by hand.
  */
 
-package android.instantambient;
+package android.ambientclient;
 
 public final class R {
     public static final class attr {
