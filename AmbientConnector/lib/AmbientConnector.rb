@@ -2,6 +2,7 @@ require "AmbientConnector/version"
 require "java"
 require "../jar/bluecove-2.1.1.jar"
 require "json"
+require "bunny"
 
 
 module AmbientConnector
@@ -19,6 +20,12 @@ module AmbientConnector
 	import "java.io.PrintWriter"
 	
 	class SPPServer
+
+		def inititalize
+			@bunny = Bunny.new(:logging => true)
+			@bunny.start
+			@exchange = @bunny.exchange("")
+		end
 		
 		def start_server
 			uuid = UUID.new("1101", true)
@@ -38,22 +45,24 @@ module AmbientConnector
 	      puts "Remote device name:    #{device.get_friendly_name(true)}"
 	      
 	      buffered_reader = BufferedReader.new(InputStreamReader.new(input_stream))      
-	      configuration = ""      
+	      configuration = buffered_reader.read_line
 	      # __EOF__ is the termination symbol
-	      while (line = buffered_reader.read_line) != "__EOF__"
-	      	puts line
-	      	unless line then break end      	      
-	      	configuration += line       	       	      
-	      end
+	      # line = ""
+	      # while line != "__EOF__"
+	      # 	line = buffered_reader.read_line
+	      # 	puts line
+	      # 	if line == nil then continue end	      	
+	      # 	configuration += line       	       	      
+	      # end
 	      
 	      puts "Configuration: #{configuration}"
 	      #send response	      
-	      print_writer= PrintWriter.new(OutputStreamWriter.new(output_stream))
-	      # if handle_configuration
-	      # 	print_writer.write("ACCEPT")
-	      # else
-	      # 	print_writer.write("ERROR")
-	      # end
+	      print_writer= PrintWriter.new(OutputStreamWriter.new(output_stream))	      
+	      if handle_configuration(configuration)
+	      	print_writer.write("ACCEPT")
+	      else
+	      	print_writer.write("ERROR")
+	      end
 	      print_writer.write("ACCEPT")
 	      print_writer.flush	 			
 	 			print_writer.close
@@ -63,7 +72,7 @@ module AmbientConnector
 
 		private
 		def handle_configuration(configuration)
-			#is configuration valid?
+			#is configuration valid?			
 			begin 
 				valid_configuration = JSON.parse(configuration)
 			rescue
@@ -71,11 +80,13 @@ module AmbientConnector
 			end
 			# add connector information to JSON
 			valid_configuration[:connector] = "AmbientConnector"
-			json_configuration = valid_configuration.generate
-			put json_configuration
+			json_configuration = JSON.generate(valid_configuration)
+			puts json_configuration
+			true
 		end
 
-		def send_configuration
+		def send_configuration(configuration)
+			@exchange.publish(configuration, :key => 'configurations')
 		end
 	end
 end

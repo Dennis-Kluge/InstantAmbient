@@ -1,7 +1,4 @@
 source "http://rubygems.org"
 
 gemspec
-
-gem "json-jruby"
-gem "json_pure"
   
