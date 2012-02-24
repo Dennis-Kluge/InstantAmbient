@@ -54,8 +54,7 @@ module AmbientConnector
 	      # 	if line == nil then continue end	      	
 	      # 	configuration += line       	       	      
 	      # end
-	      
-	      puts "Configuration: #{configuration}"
+	      	    
 	      #send response	      
 	      print_writer= PrintWriter.new(OutputStreamWriter.new(output_stream))	      
 	      if handle_configuration(configuration)
