@@ -2,7 +2,8 @@ require "AmbientConnector/version"
 require "java"
 require "../jar/bluecove-2.1.1.jar"
 require "json"
-require "bunny"
+require "socket"
+require "optparse"
 
 
 module AmbientConnector
@@ -21,17 +22,16 @@ module AmbientConnector
 	
 	class SPPServer
 
-		def inititalize
-			@bunny = Bunny.new(:logging => true)
-			@bunny.start
-			@exchange = @bunny.exchange("")
+		def initialize(options)												
+			puts "Connecting to brain at #{options[:host]} on port #{options[:port]}"
+			@socket = TCPSocket.open(options[:host], options[:port])			
 		end
 		
 		def start_server
 			uuid = UUID.new("1101", true)
-			connection_string = "btspp://localhost:#{uuid};name=AmbientConnector";
-			
+			connection_string = "btspp://localhost:#{uuid};name=AmbientConnector";			
 			loop do
+				
 				connection_notifier = Connector.open(connection_string)
 				#start connection
 				connection = connection_notifier.accept_and_open();
@@ -46,14 +46,6 @@ module AmbientConnector
 	      
 	      buffered_reader = BufferedReader.new(InputStreamReader.new(input_stream))      
 	      configuration = buffered_reader.read_line
-	      # __EOF__ is the termination symbol
-	      # line = ""
-	      # while line != "__EOF__"
-	      # 	line = buffered_reader.read_line
-	      # 	puts line
-	      # 	if line == nil then continue end	      	
-	      # 	configuration += line       	       	      
-	      # end
 	      	    
 	      #send response	      
 	      print_writer= PrintWriter.new(OutputStreamWriter.new(output_stream))	      
@@ -68,8 +60,7 @@ module AmbientConnector
 	     	connection_notifier.close		      	      
 	     end	     
 		end
-
-		private
+		
 		def handle_configuration(configuration)
 			#is configuration valid?			
 			begin 
@@ -81,14 +72,30 @@ module AmbientConnector
 			valid_configuration[:connector] = "AmbientConnector"
 			json_configuration = JSON.generate(valid_configuration)
 			puts json_configuration
+			send_configuration(json_configuration)
 			true
 		end
 
-		def send_configuration(configuration)
-			@exchange.publish(configuration, :key => 'configurations')
+		def send_configuration(configuration)						
+			puts "Sending configuration to brain"
+			@socket.write(configuration)
+			@socket.flush
 		end
 	end
 end
 
-server = AmbientConnector::SPPServer.new
-server.start_server
+# options = {:host => "localhost", :port => 8081}
+# OptionParser.new do |opts|
+#   opts.banner = "Usage: AmbienConnector.rb -h localhost -p 8081"
+
+# 	opts.on("-h", "--host HOST", "address to brain", String) do |h|
+#     options[:host] = h
+#   end
+
+#   opts.on("-p", "--port PORT", "port to brain", Integer) do |p|
+#     options[:port] = p
+#   end
+# end.parse!
+
+# server = AmbientConnector::SPPServer.new(options)
+# server.start_server
