@@ -1,6 +1,7 @@
 require "AmbientConnector/version"
 require "java"
-require "../jar/bluecove-2.1.1.jar"
+# require "../jar/bluecove-2.1.1.jar"
+require "jar/bluecove-2.1.1.jar"
 require "json"
 require "socket"
 require "optparse"
