@@ -1,3 +1,5 @@
+require "optparse"
+
 options = {:host => "localhost", :port => 8081}
 OptionParser.new do |opts|
   opts.banner = "Usage: AmbienConnector.rb -h localhost -p 8081"
