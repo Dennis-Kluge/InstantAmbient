@@ -32,6 +32,8 @@ public class BluetoothConnectedThread extends Thread {
         byte[] buffer = new byte[1024];  // buffer store for the stream
         int bytes; // bytes returned from read()
 
+        System.out.println("Ausgabe: bluetoothconnectedthread 2");
+
         // Keep listening to the InputStream until an exception occurs.
         while (true) {
             try {
@@ -40,7 +42,10 @@ public class BluetoothConnectedThread extends Thread {
                 // Send the obtained bytes to the UI Activity.
 //                mHandler.obtainMessage(MESSAGE_READ, bytes, -1, buffer)
 //                        .sendToTarget();
-                System.out.println("Ausgabe: buffer: " + buffer[0]);
+
+                String bufferString = new String(buffer);
+                System.out.println("Ausgabe: buffer: " + bufferString);
+
             } catch (IOException e) {
                 break;
             }
@@ -51,6 +56,9 @@ public class BluetoothConnectedThread extends Thread {
     public void write(byte[] bytes) {
         try {
             mmOutStream.write(bytes);
+
+            mmOutStream.flush();
+
         } catch (IOException e) { }
     }
 

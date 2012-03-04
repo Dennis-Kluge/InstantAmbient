@@ -11,9 +11,15 @@
     <string name="txt_light">Licht</string>
     <string name="txt_temperature">Temperatur</string>
 
+    <string name="txt_enable_bluetooth">Bitte schalten Sie ihr Bluetooth ein, sonst kann die App nicht Ordnungsgemäß benutzt werden.</string>
+
+
     
     <string name="button_save_config">Konfiguration anlegen</string>
     <string name="button_save">Speichern</string>
     <string name="button_cancel">Abbrechen</string>
+
+    <string name="button_ok">Ok</string>
+
     
 </resources>

@@ -54,22 +54,21 @@
         android:layout_below="@+id/textView2"
         android:layout_marginBottom="20dip"
         android:text="0" />
-    <!--
-        android.widget.NumberPicker
-        android:id="@+id/temperaturePicker"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content" /
-    -->
 
-    <Button
-        android:id="@+id/saveConfigButton"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_marginBottom="10dip"
-        android:text="@string/button_save_config" />
 
-    <!-- RelativeLayout
+   
+
+        <Button
+            android:id="@+id/saveConfigButton"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_marginBottom="10dip"
+            android:text="@string/button_save_config" />
+
+        <!--
+         RelativeLayout
+
         android:id="@+id/setConfigsView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -81,16 +80,26 @@
             android:layout_height="wrap_content"
             android:layout_marginBottom="5dip"
             android:layout_centerHorizontal="true"
-            android:text="@string/txt_temperature" /-->
 
-        <!-- android.widget.NumberPicker
+            android:text="@string/txt_temperature" /
+        -->
+
+
+        <!--
+             android.widget.NumberPicker
+
             android:id="@+id/configPicker"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerHorizontal="true"
-            android:layout_below="@+id/textView3" /-->
 
-        <!-- Button
+            android:layout_below="@+id/textView3" /
+        -->
+
+
+        <!--
+    Button
+
             android:id="@+id/saveButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -107,6 +116,14 @@
             android:layout_marginLeft="5dip"
             android:layout_toRightOf="@+id/saveButton"
             android:text="@string/button_cancel" />
-    </RelativeLayout-->
+
+    </RelativeLayout
+        -->
+ <!-- android.widget.TimePicker
+        android:id="@+id/temperaturePicker"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+    </android.widget.TimePicker -->
+
 
 </RelativeLayout>
