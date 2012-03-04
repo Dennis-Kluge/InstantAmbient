@@ -1,7 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <string name="hello">Hello World, Registration!</string>
+    <string name="hello">Du kannst hier schon einmal deine allgemeine Konfiguration einstellen</string>
     <string name="app_name">AmbientClient</string>
+    <string name="title_registration">Registrierung</string>
+    <string name="title_main_activity">Umgebungsübersicht</string>
+    
+    
+    
+    <string name="txt_light">Licht</string>
+    <string name="txt_temperature">Temperatur</string>
 
+    
+    <string name="button_save_config">Konfiguration anlegen</string>
+    <string name="button_save">Speichern</string>
+    <string name="button_cancel">Abbrechen</string>
+    
 </resources>
