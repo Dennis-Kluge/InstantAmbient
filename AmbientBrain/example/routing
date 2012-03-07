@@ -1,0 +1,18 @@
+#routing configuration
+
+
+internal representation:
+
+{:all => [:logger], :security => [:center, :securtiy_connector, {:living_toom => :room_handler}]}
+
+section :all do
+	to :logger
+end
+
+section :security do
+	to :center
+	to :security_connector
+	section :living_room do
+		to :room_handler
+	end
+end
