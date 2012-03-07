@@ -9,7 +9,7 @@ Gem::Specification.new do |s|
   s.email       = ["denniskluge@me.com"]
   s.homepage    = "http://github.com/horstmumpitz"
   s.summary     = "Bluetooth connector for the instant ambient project. "
-  s.description = ""
+  s.description = "The connector is based on JRuby the bluecove Bluetooth libraby and sockets."
 
   s.rubyforge_project = "AmbientConnector"
 

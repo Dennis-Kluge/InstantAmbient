@@ -1,6 +1,6 @@
 # -*- encoding: utf-8 -*-
 $:.push File.expand_path("../lib", __FILE__)
-require "AmbientBrain/version"
+require "ambient_brain/version"
 
 Gem::Specification.new do |s|
   s.name        = "AmbientBrain"
@@ -19,12 +19,13 @@ Gem::Specification.new do |s|
   s.require_paths = ["lib"]
 
   s.add_dependency "json"
-  s.add_dependency "amqp"
+  s.add_dependency "eventmachine"
 
   s.add_development_dependency "guard"
   s.add_development_dependency "rspec"
   s.add_development_dependency "ruby_gntp"
   s.add_development_dependency "guard-rspec"
   s.add_development_dependency "guard-livereload"
+  s.add_development_dependency "simplecov"
 
 end

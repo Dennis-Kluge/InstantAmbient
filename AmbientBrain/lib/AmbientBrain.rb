@@ -1,24 +1,34 @@
-require "AmbientBrain/version"
-require "amqp"
+require "eventmachine"
 require "json"
 
-#AmbientBrain::start
-EventMachine.run do
-	connection = AMQP.connect(:host => '127.0.0.1', :port => 3000)
-	puts "Connecting to AMQP broker. Running #{AMQP::VERSION} version of the gem..."
+require "ambient_brain/version"
+require "ambient_brain/broker"
+require "ambient_brain/receiver"
+require "ambient_brain/section"
+require "ambient_brain/connection"
 
-	channel  = AMQP::Channel.new(connection)
-	queue    = channel.queue("amqpgem.examples.hello_world", :auto_delete => true)
-	exchange = channel.default_exchange
+broker = Broker.new do 
 
-	queue.subscribe do |payload|
-		puts "Received a message: #{payload}. Disconnecting..."
-
-		connection.close {
-			EventMachine.stop { exit }
-		}
+	section :security do
+		to :security_system, :filter => [:json, :serialized], :secure => true		
+		to :bathroom, :filter => [:json, :serialized], :secure => true		
 	end
 
-	exchange.publish "Hello, world!", :routing_key => queue.name
+	section :media do
+		to :tv, :filter => [:json, :serialized], :secure => true		
+		to :stereo, :filter => [:json, :serialized], :secure => true		
+	end
+
 end
+
+puts "===== ROUTER ====="
+puts broker
+
+EventMachine.run {
+  EventMachine.connect('127.0.0.1', 8081, BrainConnection, broker)
+  puts "Starting the brain..."
+}
+
+
+
 
