@@ -19,6 +19,7 @@ Gem::Specification.new do |s|
   s.require_paths = ["lib"]
 
   s.add_dependency "json"
+  s.add_dependency "xml-simple"
   s.add_dependency "eventmachine"
 
   s.add_development_dependency "guard"

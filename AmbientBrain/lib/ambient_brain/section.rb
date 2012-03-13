@@ -1,14 +1,14 @@
 class Section
 
-	attr_reader :receivers
+	attr_reader :receivers, :name
 
 	def initialize(name)
 		@name = name
 		@receivers = []
 	end
 	
-	def add_receiver(receiver, options={})		
-		@receivers << Receiver.new(receiver, options)
+	def add_receiver(receiver)		
+		@receivers << receiver
 	end
 
 	def to_s

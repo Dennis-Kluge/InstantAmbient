@@ -9,14 +9,17 @@ require "ambient_brain/connection"
 
 broker = Broker.new do 
 
+	receiver :security_system, :address => "127.0.0.1", :port => 80, :filter => [:json, :serialized], :secure => true		
+
 	section :security do
-		to :security_system, :filter => [:json, :serialized], :secure => true		
-		to :bathroom, :filter => [:json, :serialized], :secure => true		
+		to :security_system
+		to :bathroom
 	end
 
+
 	section :media do
-		to :tv, :filter => [:json, :serialized], :secure => true		
-		to :stereo, :filter => [:json, :serialized], :secure => true		
+		to :tv
+		to :stereo
 	end
 
 end

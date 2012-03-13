@@ -1,24 +1,44 @@
+require "xmlsimple"
+require "json"
+
 class Receiver
 
-	attr_reader :filters, :secure
+	attr_reader :format, :secure, :name
 
-	def initialize(receiver, options = {})		
-		@receiver = receiver
-		@filters = []
+	def initialize(name, options)		
+		@name = name		
 		@secure = false
-
-		# write args
+		
 		options.each do |key, value|			
 			case key
-			when :filter
-				@filters = value
+			when :format
+				@format = value
 			when :secure				
 				@secure = value
 			end						
 		end		
 	end	
 
+	def send(value)
+		puts "#{name}-SEND: #{value}"
+		convert(value)
+	end
+
+	def convert(data)		
+		case format
+		when :json
+			converted_data = Converter.to_json(data)
+		when :xml			
+			converted_data = Converter.to_xml(data)
+		when :txt
+			converted_data = Converter.to_txt(data)
+		else	
+			converted_data = data
+		end
+		converted_data
+	end
+
 	def to_s
-		"	-> to #{@receiver} with filters #{@filters} and secure = #{@secure}"		
+		"	-> to #{@name} with format #{@format} and secure = #{@secure}"		
 	end	
 end
