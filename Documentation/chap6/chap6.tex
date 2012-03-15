@@ -1,10 +1,47 @@
 \chapter{Konfigurationen}
 
-\section{Definition einer Konfiguaration}
-- wie definiert sich eine konfiguration, was ist sie
-- Aufbau einer Konfiguration
+Dieses Kapitel beschäftigt sich mit dem generellen Aufbau von Konfigurationen welche zwischen dem Smartphone und einem Connector ausgetauscht wird. Diese wird vom Benutzer
+mit Hilfe der App erstellt und editiert. In den nächsten Abschnitte werden ausgehend von der Definition einer Konfiguration der allgemeine Aufbau und Mechanismen im Umgang
+mit dieser eingeführt. Anschließend werden mögliche Datenformate und die Vorhersage von künftigen Konfigurationen diskutiert. Da es keine bestehenden Systeme gibt, welche 
+Konfigurationen für die betrachteten Szenarien bereitstellen, wird ein Versuch unternommen eine eigene Spezifiaktion zu beschreiben.
 
-\section{Aufbau}
+
+\section{Definition einer Konfiguaration}
+Im Kontext der Informatik ist der Begriff Konfiguration aus eher zwei unterschiedlichen Gebieten bekannt, so beschreibt dieser Begriff zunächst die Möglichkeit Parameter von
+Programmen teilweise frei und in gewissen Grenzen anzupassen. So kennt jeder die Möglichkeit sein Mailprogramm zu konfigurieren und etwa neue Accounts hinzuzufügen. 
+Ein weiteres mal tritt die Konfiguration in der theoretischen Informatik auf, so lässt sich das Konstrukt der Automtaten mit Hilfe von Konfigurationen beschreiben. Genauer
+gesagt, wird der Zustandsübergang damit beschrieben\footnote{Des Weiteren sind z.B. in der Erzähltheorie und Chemie Konstrukte wie der Konfiguration vorzufinden. }. 
+\\\\
+In beiden Beispielen kommt zur Geltung, dass mit Hilfe einer Konfiguration der Zustand eines gewissen Konstruktes ausgehend vom Ersteller / Nutzer beschrieben wird. Diese
+Beschreibung trifft ebenfalls auf InstantAmbient zu jedoch mit ein paar speziellen Anmerkungen. Zunächst können je nach Möglichkeit der Umgebung eine Vielzahl an 
+Einstellungen vorgenommen werden und es wird sich nicht ausschließlich auf eine Konfiguration konzentriert, sondern je nach Situation eine neue angelegt oder verändert. Am 
+besten lässt sich dies mit einer Vielzahl von Konfigurationen beschreiben die für eine spezielle Plattform angepasst sind. Mit Hilfe dieser Beschreibung lässt sich eine Definition für Konfiguration innerhalb von InstantAmbient beschreiben.
+
+\newtheorem{mydef}{Konfiguration}
+\begin{mydef}
+Eine Konfiguration beschreibt den gewünschten Zustand einer Umgebung, welche von einem User definiert wird. Dabei beschreibt genau eine Konfiguration eine Umgebung. Als
+Umgebung können beispielsweise Gebäude als ganzes, einzelne Räume oder gar Autos angesehen werden.
+\end{mydef}
+
+Diese Definition beschreibt die Konfiguration als solches sehr generell im folgenden wird diese ergänzt unter anderem einer Beschreibung wie diese aufgebaut ist. 
+- Quellen einfügen 
+
+\section{Aufbau} 
+Nachdem allgemein Formuliert wurde, wie eine Konfiguration beschrieben ist, wird erläutert wie sich der Aufbau gestaltet. Hierfür werden mehrere Mechanismen beschrieben, 
+welche notwendig für die Gestaltung einer Konfiguration sind. Diese beschreiben den allgemeinen Aufbau und gehen bis hin zu Konzepten wie der Polymorphie. 
+
+
+\subsection{Allgemeine Strukturierung}
+\subsection{Typen}
+\subsection{Sektionen}
+\subsection{Polymorphie}
+
+\section{Ableitungen von Konfigurationen} 
+
+\section{Priorisierung}
+
+\section{Echtzeit-Änderungen}
+
 \section{Datenformate}
 -XML
 -YAML
@@ -15,6 +52,4 @@ Entscheidung auf JSON vergleich der Dateoigrößen anführen.
 
 
 
-\section{Priorisierung}
 \section{Vorhersage}
-\section{Echtzeit-Änderungen}
