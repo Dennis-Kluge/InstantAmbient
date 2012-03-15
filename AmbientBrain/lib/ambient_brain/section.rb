@@ -9,7 +9,7 @@ class Section
 	
 	def add_receiver(receiver)		
 		@receivers << receiver
-	end
+ 	end
 
 	def to_s
 		puts "Section #{@namye}"

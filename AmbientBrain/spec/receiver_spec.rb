@@ -14,12 +14,5 @@ describe Receiver do
 		@receiver.format.should eq :json
 	end
 
-	it "converts data to json" do
-		@receiver.convert({"channels"=>["ARD", "ZDF", "ARTE"]}).should eq '{"channels":["ARD","ZDF","ARTE"]}'
-	end
-
-	it "converts data to xml" do
-		@receiver_xml.convert({"channels"=>["ARD", "ZDF", "ARTE"]}).should eq "<opt>\n  <channels>ARD</channels>\n  <channels>ZDF</channels>\n  <channels>ARTE</channels>\n</opt>\n" 
-	end
 
 end
