@@ -1,0 +1,17 @@
+<configuration>
+	<!-- Deklaration einer Zahl -->
+	<number name="temperatur">21</number>
+	
+	<text name="willkommens_nachricht">Herzlich Willkommen</text>
+	<!-- Eine Sammlung an Attributen -->
+	<collection name="tv_sender" >
+		<text>ARD</text>
+		<text>ZDF</text>
+		<text>Phoenix</text>
+	</attribute>
+
+	<!-- Sektionen -->
+	<bathroom>
+		<number name="temperatur">22</number>
+	</bathroom>
+</configuration>
