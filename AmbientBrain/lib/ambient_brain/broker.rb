@@ -13,8 +13,7 @@ class Broker
 
 	def section(name, &block)
 		@sections[name] = Array.new
-		@last_section = name
-		#@sections << Section.new(name)
+		@last_section = name		
 		block.call(self) if block_given?				
 	end
 
