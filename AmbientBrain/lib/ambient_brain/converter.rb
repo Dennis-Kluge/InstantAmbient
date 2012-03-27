@@ -7,7 +7,6 @@ class Converter
 		if data.class == Hash
 			txt = ""
 			data.each do |key, value|
-				puts "IN"
 				txt += "#{key} - "
 				if value.class == Array 
 					value.each do |v|						
