@@ -9,11 +9,11 @@ require "ambient_brain/connection"
 
 broker = Broker.new do 
 
-	receiver :security_system, :address => "127.0.0.1", :port => 80, :filter => [:json, :serialized], :secure => true		
+	receiver :security_system, :address => "127.0.0.1", :port => 9000, :filter => [:json, :serialized], :secure => true		
+	receiver :actor, :address => "127.0.0.1", :port => 9123, :format => :txt, :secure => true		
 
-	section :security do
-		to :security_system
-		to :bathroom
+	section :light do
+		to :actor
 	end
 
 
@@ -28,7 +28,8 @@ puts "===== ROUTER ====="
 puts broker
 
 EventMachine.run {
-  EventMachine.connect('127.0.0.1', 8081, BrainConnection, broker)
+  # EventMachine.connect('127.0.0.1', 8081, BrainConnection, broker)
+  EventMachine.start_server('127.0.0.1', 8081, BrainConnection, broker)
   puts "Starting the brain..."
 }
 
