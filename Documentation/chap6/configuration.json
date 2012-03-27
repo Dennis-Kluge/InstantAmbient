@@ -1,0 +1,9 @@
+{
+	"temperatur" : 21,
+	"willkommens_nachricht" : "Herzlich Wollkomen", 
+	"tv_sender" : ["ARD", "ZDF", "Phoenix"], 
+
+	"bathoroom" : {
+		"tempertur" : 22
+	}
+}

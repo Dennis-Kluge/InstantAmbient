@@ -192,6 +192,8 @@ Als zweiter möglicher Formatkandidat, wurde sich für JSON entschieden. Dieses 
 
 Es wurde exakt das gleiche Beispiel wie zuvor im Abschnitt zu XML gewählt, es ist ersichtlich, dass JSON insgesamt schmaler und einfacher zu lesen ist. Des Weiteren sind die einzelnen Datentypen erkennbar.
 
+# was ist freundlicher? 
+
 ### Formatentscheidung
 Eine Entscheidung für ein Format bringt immer Tücken mit sich und es müssen vorsichtig Vor- und Nachteile abgewägt werden. Wünschenswert wäre eine Multiformat-Unterstützung da im Endeffekt XML und JSON die gleichen Belange im Grunde nur unterschiedlich codieren. Im Falle von InstantAmbient wird sich für JSON entschieden. Es gibt einige entscheidende Vorteile neben den fest integrierten Datentypen, sind die Dateien kompakter und es gibt eine Reihe an performanten Parsern. Insgesamt tritt weniger Overhead auf wie bei klassichen Markup-Sprachen. Diese Entscheidung soll jedoch kein Dogma sein, so wird die Archtiektur es vorsehen, dass diese Formate änderbar sind. 
 
