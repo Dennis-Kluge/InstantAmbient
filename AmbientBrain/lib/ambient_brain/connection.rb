@@ -9,11 +9,12 @@ class BrainConnection < EventMachine::Connection
    
   def receive_data(data)
     p data
-
-    #@broker.apply_data(data)
-
-    #send_data data
-    #close_connection_after_writing 
+    if @broker.apply_data(data)
+      send_data "success"  
+    else
+      send_data "error please try again"  
+    end
+    close_connection_after_writing     
   end
 
   def unbind

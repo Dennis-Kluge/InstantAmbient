@@ -1,5 +1,7 @@
 require "xmlsimple"
 require "json"
+require "socket"
+require "ambient_brain/converter"
 
 class Receiver
 
@@ -15,6 +17,10 @@ class Receiver
 				@format = value
 			when :secure				
 				@secure = value
+			when :address
+				@address = value
+			when :port
+				@port = value
 			end						
 		end		
 	end	
@@ -22,6 +28,9 @@ class Receiver
 	def send(value)
 		puts "#{name}-SEND: #{value}"
 		convert(value)
+		socket = TCPSocket.open(@address, @port)
+		socket.write(convert(value))
+		socket.flush
 	end
 
 	def convert(data)		
