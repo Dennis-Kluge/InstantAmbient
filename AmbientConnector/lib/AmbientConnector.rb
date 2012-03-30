@@ -25,7 +25,8 @@ module AmbientConnector
 
 		def initialize(options)												
 			puts "Connecting to brain at #{options[:host]} on port #{options[:port]}"
-			@socket = TCPSocket.open(options[:host], options[:port])			
+			@options = options
+			
 		end
 		
 		def start_server
@@ -79,8 +80,10 @@ module AmbientConnector
 
 		def send_configuration(configuration)						
 			puts "Sending configuration to brain"
-			@socket.write(configuration)
-			@socket.flush
+			socket = TCPSocket.open(@options[:host], @options[:port])			
+			socket.write(configuration)
+			socket.flush
+			socket.close
 		end
 	end
 end
