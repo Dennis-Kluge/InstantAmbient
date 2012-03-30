@@ -9,6 +9,8 @@ class BrainConnection < EventMachine::Connection
    
   def receive_data(data)
     p data
+
+    puts "RECEIVED: #{data}"
     if @broker.apply_data(data)
       send_data "success"  
     else
