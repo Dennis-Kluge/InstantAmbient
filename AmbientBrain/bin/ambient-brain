@@ -1,0 +1,18 @@
+require "optparse"
+require "ambient_brain"
+
+options = {:host => "localhost", :port => 9123}
+OptionParser.new do |opts|
+  opts.banner = "Usage: AmbienBrain.rb -h localhost -p 8081"
+
+	opts.on("-h", "--host HOST", "address on which the brain is listening", String) do |h|
+    options[:host] = h
+  end
+
+  opts.on("-p", "--port PORT", "port on which the brain is listening", Integer) do |p|
+    options[:port] = p
+  end
+end.parse!
+
+
+AmbientBrain::start(options)
