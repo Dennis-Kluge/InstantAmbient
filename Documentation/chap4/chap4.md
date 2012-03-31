@@ -1,26 +1,39 @@
-# Lösungsstrategie von InstantAmbient
-
-Nachdem im letzten Kapitel ausführlich der Aufbau und die Verabreiung von Konfigurationen diskutiert worde, widmet sich dieses den verabeitenden Systemen.
-Lössungsstrategien bedeutet, dass ein überblick darüber gegeben wird wie im generellen konfigurationsbasierte aufgebaut sein können. 
+# Lösungsstrategie von InstantAmbient
+Nachdem im letzten Kapitel ausführlich der Aufbau und die Verarbeitung von Konfigurationen diskutiert wurde, widmet sich dieses den verarbeitenden Systemen.
+Lösungsstrategien bedeutet, dass ein überblick darüber gegeben wird wie im generellen konfigurationsbasierte Dienste aufgebaut sein können. 
 
 ## Anforderungen
 
-- skalierbar
-- sollte große last aushalten
-- verständlich, benutzerfreundlich
-- absolute stabilität 
-
+Ein sehr wichtiger Bestandteil den InstantAmbient erfüllen muss ist die Skalierbarkeit. Das System muss in einer kleineren Umgebung wie dem Auto als auch in einer großen Umgebung wie ein Hotel funktionieren. Demzufolge muss das System auch eine sehr große Last aushalten können. Hier ist die Last auf Grund der hohen Anzahl an verschiedene Räume ein ausschlaggebender Punkt. Es muss also möglich sein, dass mehrere Leute zur gleichen Zeit ihre Konfiguration senden können und diese dann ohne Probleme vom System verarbeitet werden. Des Weiteren muss das System eine verständliche Benutzerführung haben. Dementsprechend muss der Client eine sehr leicht zu bedienende Oberfläche mit kurzen Wegen haben. Dies erleichtert dem Benutzer das leichte und schnelle ändern von Konfigurationen.   
 
 ## Backend lastig
+Es gibt verschiedene Wegen eine konfigurationsbasierten Dienst zu realisieren. Zum einen gibt es die Möglichkeit, die gesamten Daten im Backend zu lagern. Zum anderen gibt es die Möglichkeit die Gesamten Daten auf dem Client zu Speichern. Dieses wird im nächsten Abschnitt näher erläutert.
+\\\\
+Entwickelt man das System Backend lästig bedeutet dies, dass die gesamten Daten von InstantAmbient im Backend gelagert werden. 
+Dadurch wird auch eine Benutzerverwaltung benötigt. Ohne diese wäre es nicht möglich die Konfigurationsdaten zu dem jeweiligen Benutzer möglich zuzuordnen. Damit der Benutzer selber seine Konfiguration vornehmen kann, benötigt das Backend eine Benutzerschnittstelle. Dabei gibt es verschiedene Möglichkeiten. Man könnte im Bereich von Hotels und Autovermietungen ein Terminal bereitstellen bei dem sich der Benutzer anmeldet um seine Umgebung auf seine Wünsche anzupassen. Dies führt mit sich, dass das Terminal an einem leicht zu erreichenden Standort steht. Eine andere Möglichkeit ist die Verwaltung mittels eines Webclients. Bei der Autovermietung sowie bei Hotels ist es für den Benutzer nicht unbedingt komfortabel sich erst noch an ein Terminal zu stellen um seine gewünschte Änderungen vorzunehmen. 
+Ein weitere Aspekt ist die Authentifizierung. Bei der selbstständigen Benutzerverwaltung kann dies sehr einfach mit einem Benutzernamen und einen Passwort erfolgen, allerdings ist die bei der Authentifizierung im Auto oder Hotelzimmer zum Laden der Daten nicht unbedingt Benutzerfreundlich. Hierbei könnte man natürlich auf Smartcards oder RFID-Tags in Form eines runden Schlüsselanhänger zurückgreifen. Dieser würde dann nur zu Authentifizierung dienen, wodurch das System weiß, welches Profil geladen und an die Umgebung geschickt werden muss. Zusätzlich gibt es hierbei noch die Möglichkeit das System Zentral oder Dezentral aufzubauen. Das bedeutet wiederum, dass die Daten an die jeweilige Umgebung überführt werden müssen und das Diese einen großen Daten Speicher brauchen, da eine Vielzahl von Personen die Umgebung nutzen, wie bei einer Vermietung oder einem Hotel. Natürlich können auch nur die Daten in der Umgebung gespeichert werden, von den Personen die sich in der nächsten Zeit in dieser Umgebung befinden. Allerdings haben die Benutzer dann nicht die aktuelle Konfiguration ihrer Umgebung, falls diese am bereit gestellten Terminal noch Änderungen vornehmen.  
+Generell wird bei dieser Umsetzung des Systems eine hohe Datenmenge für das Backend anfallen und es wird eine große Speicherkapazität benötigt.
 
+ 
+    
 ## Client lastig
+
+Wie schon angesprochen, ist bei einem Client lastigem System gemeint das die Daten auf diesem Gerät gespeichert werden, wodurch der Client an umfang zunimmt. Auf Grund der Datenmenge die bei einem solchen System auf dem Client gespeichert werden, ist in diesem Fall ein Smartphone als Client gewählt worden.  
+\\\\
+Durch die Verfügbarkeit eines Smartphones als Client hat man die Möglichkeit eine App zu entwickeln, die es dem Benutzer ermöglich seine Umgebung zu jederzeit zu Konfigurieren und auf dem Gerät zu speichern. Würde man auf eine alternative wie zum Beispiel eine Smardcard setzten bräuchte man hierfür wiederum ein Lese- und Schreibgerät sowie eine Anwendung um seine Umgebung zu Konfigurieren und auf die Smardcard zu übertragen. Dies ist ein weiterer Aspekt der für das Smartphone spricht.
+\\\\
+Durch die Verwendung so eines externen Datenspeichers müssen die Daten nicht mehr im Backend gespeichert werden, wodurch keine große Speicherkapazität mehr benötigt wird. Es wird auch keine Schnittstelle wie ein Terminal oder ein Webclient mehr benötigt. Da in diesem Fall der Datenspeicher Personengebunden ist, ist auch keine Benutzerverwaltung mehr notwendig. Somit bekommt das Backend eine Fokussierung auf das Empfangen und die Verarbeitung der Konfiguration sowie das Ansprechen der richtigen Umgebung.
+Da bei einem Clientlastigem System die gesammelten Konfigurationen, von allen Umgebungen die eine Person angelegt hat, auf dem Client vorhanden ist, muss dieser darüber informiert werden welche Konfiguration er gerade senden soll. 
+Natürlich muss in diesem Fall das Backend dem Client darüber Informieren welche Konfiguration benötigt wird, damit der Client diese übertragen kann. Im Allgemeinen ist zu sagen das dieses System zwei ausgeglichene Seiten schafft. Zum einen die Clientseite, die zur Konfiguration der Daten und zur Speicherung dieser dient. Zum anderen die Backendseite, die zur Verarbeitung und ansprechen der jeweiligen Umgebungen dient. Ein Punkt den dieses System noch bietet ist, dass man durch das schlanke Backend dieses in beliebige Umgebungen einbauen kann und somit das System keinen Prinzipiellen unterschied zwischen einem Auto und einem Haus macht. Lediglich die Konfigurationsmöglichkeiten sowie die anzusprechenden Geräte sind unterschiedlich. Das bedeutet das Leichte austauschen von Komponenten.
 
 ## Proof of concept
 
-Im nächsten Kapitel wir die Architektur, Technologie und die einzelnen Komponenten genauer beleuchtet.
+Beim Vergleich dieser beiden Systeme kann man feststellen, dass das Prinzip eines Clientlastigen Systems mehr Vorteile mit sich bringt. Da hierbei keine Terminals oder Speicherkapazität, zusätzlich zum ansprechen der zu konfigurierenden Geräte benötigt wird. 
+\\\\ 
+Daher verfolgt InstantAmbient die Lösung eines Clientlastiges Systems. \\
+Soviel vorweggenommen, als Client wird eine App für ein Android Smartphone entwickelt. Dieser soll es dem Benutzer ermöglichen auf einfachen Weg Konfigurationen zu erstellen, bearbeiten und zu Speichern. Der Client soll sich dann über Bluetooth mit dem Backend verbinden und die Konfigurationen als JSON-Objekt an das Backend übertragen. Das Backend hat die Aufgabe die Daten zu empfangen, diese zu Verarbeiten und dementsprechend die aufbereiteten Informationen an die jeweilige Schnittstelle der zu Konfigurierenden Geräte zu senden. 
+Somit wird ein System entstehen in dem der Benutzer seine Daten Ortsunabhängig ändern kann und bei Verbindung des Clients mit dem Backend diese übertragen werden. 
 
-- abstrakt halten
-- nicht zu sehr in die technische Schiene gehen. 
+Im nächsten Kapitel wird die Architektur, Technologie und der Aufbau der einzelnen Komponenten genauer beleuchtet.
 
-- wie sehen wir eine mögliche Lösung aus
-- Generalisierung ansprechen
+
