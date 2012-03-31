@@ -17,8 +17,6 @@ class Broker
 		block.call(self) if block_given?				
 	end
 
-
-
 	def receiver(name, options)		
 		@receivers << Receiver.new(name, options)				
 	end

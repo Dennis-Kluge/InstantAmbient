@@ -1,6 +1,5 @@
 require "AmbientConnector/version"
 require "java"
-# require "../jar/bluecove-2.1.1.jar"
 require "jar/bluecove-2.1.1.jar"
 require "json"
 require "socket"
@@ -87,19 +86,3 @@ module AmbientConnector
 		end
 	end
 end
-
-# options = {:host => "localhost", :port => 8081}
-# OptionParser.new do |opts|
-#   opts.banner = "Usage: AmbienConnector.rb -h localhost -p 8081"
-
-# 	opts.on("-h", "--host HOST", "address to brain", String) do |h|
-#     options[:host] = h
-#   end
-
-#   opts.on("-p", "--port PORT", "port to brain", Integer) do |p|
-#     options[:port] = p
-#   end
-# end.parse!
-
-# server = AmbientConnector::SPPServer.new(options)
-# server.start_server

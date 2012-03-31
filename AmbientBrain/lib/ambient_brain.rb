@@ -12,8 +12,7 @@ module AmbientBrain
 	@broker = Broker.new do 
 
 		receiver :living_actor, :address => "127.0.0.1", :port => 9123, :format => :xml, :secure => true
-		receiver :bedroom_actor, :address => "127.0.0.1", :port => 9124, :format => :xml, :secure => true		
-
+		receiver :bedroom_actor, :address => "127.0.0.1", :port => 9124, :format => :xml
 		section :living_room do
 			to :living_actor
 		end

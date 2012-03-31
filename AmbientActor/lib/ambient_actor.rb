@@ -1,5 +1,6 @@
 require "AmbientActor/version"
 require "eventmachine"
+require "xmlsimple" 
 
 
 module AmbientActor
@@ -7,7 +8,10 @@ module AmbientActor
 	class ActorConnection < EventMachine::Connection
    
   	def receive_data(data)
-    	p data    
+    	p data
+      hashed_data = XmlSimple.xml_in(data)    
+      p hashed_data
+      
   	end
 
   	def unbind
