@@ -20,6 +20,7 @@ Auf den ersten Blick scheint die hohe Anzahl der einzelnen Komponenten vielleich
 Die folgenden Abschnitte, werden die Komponenten genauer erläutern.
 
 ## Aufbau Client
+
 ## Aufbau Backend
 Wie bereits im Überblick erläutert, besteht das Backend aus mehreren untereinander austauschbaren Komponenten. Die Vorteile wurden bereits diskutiert, jedoch müssen eben diese drei Komponenten konzipiert und untereinander verbunden werden.
 Im folgenden wird näher auf die Komponenten eingegangen ohne auf die spezifische Implementierung einzugehen.
@@ -48,6 +49,32 @@ Die vorgestellte Architektur ist kein starres Konstrukt, sondern auch dafür vor
 Da z.B. bei der Authentifiezierung nur das Brain als wesentliche Instanz mit den Service kommunizieren muss, steigt die Komplexität nur in diesem Teil der Anwendung. Damit soll gezeigt werden, dass die Wahl mehrere Teilsysteme zu nutzen den Vorteil hat, das System einfach zu erweitern und die Bedürfnisse einzelner Szenarien anzupassen. 
 
 ## Technologien
-### NFC
+Die Auswahl der Technologien richtet sich zum großen Teil an die Anwendungsszenarien und vorherschende Architektur. So sollte die Auswahl der eingesetzen Programmiersprachen und Frameworks erst nach der Konzeption vorgenommen werden, anstatt bereits zu Projektbeginn. Dieser Abschnitt widmet sich der Auswahl der Technologien aller Komponenten und diskutiert verschiedenste Möglichkeiten des Einsatzes. 
+
 ### Client
-### Backend
+Wie bereits öfter angeschnitten, handelt es sich bei dem Client um eine auf Android basierende Smartphone-App. Daher verfällt die Wahl der Programmiersprache und es kommt Java mit dem Andoid SDK der Version 10 (Amdroid 2.3.3) zum Einsatz. Für die Generierung der serialisierten Konfigurationen wurde das interne JSON-Framework eingesetzt. Um zusätzlich einen Eindruck über die UI gewinnen zu können, wurde das MockUp-Tool Balsamiq eingesetzt.
+Die Wahl auf Android erfolgte auf Grund zweier Hauptkriteren: 
+1. Andoid selbst ist ein offenes System und kann auf eine große Community bauen. Des Weiteren ist der Bluetooth Support besonders in der Version 2.1 gegeben 
+2. Innerhalb der Projektgruppe, gab es schon großes Know-How für diese Platform
+
+Generell ist die Entwicklung für jede andere Smartphone-Platform möglich, solange diese Bluetooth unterstützt. Die von Apple vertriebenen Produkte und im besonderen das iPhone unterstützen derzeit lediglich den neusten Bluetooth 4.0 Standard, für denen es wenige Implementierungen gibt, auch im Hinblick auf den Connector. 
+### Near Field Communication
+Die Entscheidung auf Bluetooth wurde in dieser Dokumentation einfach als gegeben gesehen. Dennoch gibt es eine Vielzahl an Gründen warum sich für diese Art der Kommunikation entschieden wurde. 
+Zunächst soll der Begriff NFC genauer beleuchtet werden. Im genaueren Technologischen Sinne, handelt es sich um eine Reihe von Standards unter anderem auch RFID, welche die Kommunikation zwischen verschiedensten NFC fähigen Endgeräten ermöglicht. Im weiteren Sinne beschreibt der Ausdruck NFC lediglich die Möglichkeit der Kommunikation verschiedenster Geräte in einem engeren Radius. Darunter kann WiFi, Bluetooth oder auch der XBee-Standard fallen. Die folgende Tabelle soll die Vorteile von Bluetooth gegenüber NFC aufzeigen: 
+NFC | Bluetooth
+Bandbreite - | ++
+Platformen Android, Nokia | iOS, Android, Blackberry …
+Verfügbare Implementierungen + | +
+
+Neben den in der Tabelle aufgezeigten Vorteilen, bringen derzeitige NFC-Implementierungen mit sich. Die Größe der übertragenen Nachrichten müssen einer bestimmten Größe entsprechen, bei libnfc beträgt diese 53 Byte. Dies reicht unter Umständen für kleinere Konfigurationen aus, wenn aber auch Listen von TV-Sendern etc. mitgeschickt werden und UTF-16 codiert sind, werden diese Grenzen schnell gesprengt. 
+Wie in der Architekturbeschreibung bereits angemerkt, ist die hier getroffene Wahl kein Dogma für das komplette Projekt, sondern der Connector kann durch seine leichtgewichtige Konzeption jederzeit ohne Probleme ausgetauscht werden. 
+### Connector
+Der Connector dient als Schnittstelle zwischen dem Client und Brain, daher ist dessen Hauptaufgabe die Übermittlung und Validierung empfangener Konfigurationen. Die Anzahl der frei verfügbaren und besonders Platformunabhängigen Bluetooth-Implementierungen ist rar. Lediglich die in Java implementierte und sperrlich gepflegte Bluecove-Library konnte den Anforderungen genügen. Der Vorteil an der Java-Platform ist ebenfalls, dass per se auch andere Sprachen eingesetzt werden können. In diesem Hinblick wurde sich für Ruby und der auf der JVM basierenden JRuby implementierung entschieden. Ruby bietet den Vorteil eine moderne, elegante Sprache zu sein, welche insbesondere dafür geeignet ist in Szenarien wie InstantAmbient und dem Proof of Conecept eingesetzt zu werden.
+
+Die Kommunikation zum Brain basiert auf einfachen TCP-Sockets, da diese ebenfalls auf jedem System verfügbar und die einfachste Variante der Datenübertragung sind. Eine weitere Alternative wäre der Einsatz von Messaging-Systemen wie AMQP oder ZeroMQ zu nutzen, welches jedoch für die erste Version einen enormen Overhead bedeutet hätte.
+### Brain
+Das Brain bildet die zentrale Instanz des Backends. Es empfängt sämtliche Daten der Connectors, bearbeitet leitet diese an die entsprechenden Actoren. Hierfür müssen unter Umständen eine Vielzahl von gleichzeitigen Netzwerkverbindungen etabliert werden. Dieses Szenario lässt sich mit dem ebenfalls für Ruby entwickelten Framework Eventmachine abbilden. Es wurde dafür konzipiert eine große Anzahl an gleichzeitigen I/Os zu verarbeiten ohne das ganze System zu blockieren. Dieses Konzept wird ebenfalls unter anderem in Twisted für Python oder Node.js für Javascript genutzt. Besonders im Brain kann Ruby seine stärken ausspielen, da die Beschreibung des Routings in einer Domänspezifischen Sprache abgebildet wird. Des Weiteren kommen Bilbiotheken im Umgang mit JSON, XML hinzu. Die Actors werden ebenfalls via TCP/IP kontaktiert. 
+### Actor 
+Wie im Falle des Connectors, ist der Actor selbst eher schmal gehalten. Dieser empfäng ebenfalls via Eventmachine die relevanten und konvertierten Teile der Konfiguration und schickt diese Informationen an die anschließenden Systeme. Bei der Beispielimplementierung wird hierfür ein Arduino eingesetzt. 
+
+Die genauen Details zur Implementierung und Umsetzung des Proof of Concepts sind in den nächsten zwei Kapitel ausführlich dokumentiert. 
