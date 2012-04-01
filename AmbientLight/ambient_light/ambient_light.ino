@@ -102,10 +102,12 @@ void loop() {
   if (Serial.available() > 0) {
     // read the incoming byte:
     incomingByte = Serial.read();
-    if(counter < 2) {      
+    if(counter < 1) {      
       buffer[counter] = incomingByte;
-      counter++;  
+      counter++;
     } else {
+      buffer[counter] = incomingByte;
+
       // finished reading
       set_led();
       Serial.println("\n");
