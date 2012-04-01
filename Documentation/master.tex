@@ -1,4 +1,4 @@
-\documentclass[11pt, a4paper]{book}
+\textbf{}\documentclass[11pt, a4paper]{book}
 
 % Test mit dem a5 format
 %\textbf{}\usepackage[a5paper]{geometry}
@@ -117,22 +117,22 @@
 %\addcontentsline{toc}{chapter}{Glossar}
 % Abbildungsverzeichnis
 %\listoffigures
+
 % Abbildungsverzeichnis
-%\chapter{Verzeichnisse}
-%\listoffigures
-%\addcontentsline{toc}{chapter}{Abbildungsverzeichnis}
+\listoffigures
+\addcontentsline{toc}{chapter}{Abbildungsverzeichnis}
 %\chapter{Abbildungsverzeichnis}
 
 %Code-Verzeichnis
-%\renewcommand{\lstlistlistingname}{Verzeichnis der Quelltextauszüge}
-%\lstlistoflistings
-%\addcontentsline{toc}{chapter}{Verzeichnis der Quelltextauszüge}
+\renewcommand{\lstlistlistingname}{Verzeichnis der Quelltextauszüge}
+\lstlistoflistings
+\addcontentsline{toc}{chapter}{Verzeichnis der Quelltextauszüge}
 
 % Bibtex mit der externen Datei bibliography.bib
-%\nocite{*}
-%\bibliography{bibliography}
-%\bibliographystyle{alpha}
-%\addcontentsline{toc}{section}{Literaturverzeichnis}
+\nocite{*}
+\bibliography{bibliography}
+\bibliographystyle{alpha}
+\addcontentsline{toc}{section}{Literaturverzeichnis}
 
 % Index
 %\clearpage
