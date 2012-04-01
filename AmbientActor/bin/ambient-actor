@@ -3,16 +3,20 @@
 require "optparse"
 require "ambient_actor"
 
-options = {:host => "localhost", :port => 9123}
+options = {:host => "localhost", :port => 9123, :device => "/dev/tty.usbmodemfa1421"}
 OptionParser.new do |opts|
   opts.banner = "Usage: AmbienConnector.rb -h localhost -p 8081"
 
-	opts.on("-h", "--host HOST", "address to brain", String) do |h|
+	opts.on("-h", "--host HOST", "address to actor", String) do |h|
     options[:host] = h
   end
 
-  opts.on("-p", "--port PORT", "port to brain", Integer) do |p|
+  opts.on("-p", "--port PORT", "port to actor", Integer) do |p|
     options[:port] = p
+  end
+
+  opts.on("-d", "--device DEVICE", "device to arduino", String) do |d|
+    options[:device] = d
   end
 end.parse!
 
