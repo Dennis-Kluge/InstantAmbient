@@ -14,7 +14,7 @@ JRuby stellt eine Implementierung der bekannten Programmiersprache Ruby für die
 Zunächst muss sich der Connector selbst als Service annoncieren, hierfür muss dieser einen SPP-Service bereitstellen. Dieser Service definiert sich durch eine zufällig generierte UUID und Namen, wodurch eine eindeutige Zuordnung möglich ist. 
 
 \lstset{language=Ruby}
-\begin{lstlisting}[caption=Erzeugen einer UUID, captionpos=b]
+\begin{lstlisting}[caption=Erzeugung einer UUID und Bereitstellung des Bluetooth-Service, captionpos=b]
 	uuid = UUID.new("1101", true)
 	connection_string = "btspp://		  
 	localhost:#{uuid};name=AmbientConnector";	
@@ -38,33 +38,41 @@ Die erste Frage ergibt sich aus der Situation, dass sich mehrere Connectors glei
 Wenden wir uns zunächst den ersten Problem zu. Bei genauerer Betrachtung stehen alle verteilten Anwendungen vor dem Problem mit hohen Lasten umzugehen. Eine Vielzahl bereits bestehender Frameworks nimmt sich dieser Thematik an, besonders unter dem Stichwort Non-Blocking IO. Im Grunde geht es bei dieser Technik darum, dass alle Anfragen asynchron und ohne Blockierung des Systems bearbeitet werden. In der Ruby-Welt hat sich im besonderen das Framework Eventmachine dieser Thematik angenommen. Das Arbeitsprinzip ist relativ einfach, innerhalb einer Eventloop werden Verbindungen entgegengenommen. Die Bearbeitung findet innerhalb einer zuvor implementierten Klasse oder Moduls statt, welches eine Connection repräsentiert. Im Grunde wird lediglich ein Interface bereitgestellt, dass das Programm nutzt und die Daten bearbeitet. 
 
 \lstset{language=Ruby}
-\begin{lstlisting}[caption=, captionpos=b]
+\begin{lstlisting}[caption=Server-Initialisierung des Brain, captionpos=b]
 	EventMachine.run {
-		  EventMachine.start_server('127.0.0.1', 8081, BrainConnection, @broker)
+		  EventMachine.start_server('127.0.0.1', 8081, 
+									       BrainConnection, @broker)
 		  puts "Starting the brain..."
-		}
+	}
 \end{lstlisting}
 
 Mit Hilfe dieser Mittel, ist es möglich ohne weiteres mehrere hundert Verbindungen pro Sekunde zu verarbeiten. 
 \\\\
-Die Lösung der Routing Problematik kann über die Weiterführung oder den Fall des Projektes entscheiden. Vor der Implementierung gilt es zu überlegen, welchen Mechanismen das Routing folgen soll. Diese Thematik wurde bereits im Abschnitt über die Architektur angerissen. Bei dem Routing geht es darum die von einem Connector empfangene Konfiguration an die jeweils dafür zuständigen Actors weiterzuleiten. Dies ist dafür notwendig, da unterschiedlichste Systeme für die Bereitstellung einzelner Konfigurationswünsche zuständig sind. Hierfür wird sich eine Eigenheiten der einzelnen Konfigurationen zu Nutze gemacht. Es wird angenommen, dass jeder Actor für eine bestimmte Sektion der Konfiguration zuständig ist. Beispielsweise gibt es einen Actor, welcher das Wohnzimmer steuert und die Daten aus der Sektion "`living_room"' empfängt. Die Frage ist wie diese Zusammenhänge in einer möglichst eleganten Form abgebildet werden können? 
+Die Lösung der Routing Problematik kann über die Weiterführung oder den Fall des Projektes entscheiden. Vor der Implementierung gilt es zu überlegen, welchen Mechanismen das Routing folgen soll. Diese Thematik wurde bereits im Abschnitt über die Architektur angerissen. Bei dem Routing geht es darum die von einem Connector empfangene Konfiguration an die jeweils dafür zuständigen Actors weiterzuleiten. Dies ist dafür notwendig, da unterschiedlichste Systeme für die Bereitstellung einzelner Konfigurationswünsche zuständig sind. Hierfür wird sich eine Eigenheiten der einzelnen Konfigurationen zu Nutze gemacht. Es wird angenommen, dass jeder Actor für eine bestimmte Sektion der Konfiguration zuständig ist. Beispielsweise gibt es einen Actor, welcher das Wohnzimmer steuert und die Daten aus der Sektion \emph{living\_room} empfängt. Die Frage ist wie diese Zusammenhänge in einer möglichst eleganten Form abgebildet werden können? 
 In vielen Fällen kann dies Fest im Code verankert werden, verhindert jedoch einen großen Grad an Flexibilität im Code. Eine weitere Beschreibung könnte mit Hilfe von Konfigurationsdateien und einer versuchten Abbildung der Zusammenhänge geschehen. Die Darstellung der Routing-Informationen auf textueller Ebene ist leicht zu definieren: 
 
-\begin{equation}
-	Empfänger Wohnzimmer, mit Adresse 127.0.0.1 und Port 8081, kann mit XML-Dateien umgehen.
+\lstset{language=bash}
+\begin{lstlisting}[caption=Beschreibung des Routings als Pseudocode, captionpos=b]
+	Empfänger Wohnzimmer, mit Adresse 127.0.0.1 und Port 8081, 
+	kann mit XML-Dateien umgehen.
 
-	Die Sektion "`living_room"' soll an das Wohnzimmer gesendet werden.
+	Die Sektion "`living_room"' soll an das Wohnzimmer 
+	gesendet werden.
 
-\end{equation} 
+\end{lstlisting}
 
 Wie zu sehen ist eine textuelle Definition des Routings im Grunde leicht verständlich und erweiterbar. Jedoch ist es für ein Programm schwer genau diese Informationen zu parsen. Genau in diesem Punkt kann Ruby seine Stärken ausspielen und es wird klar, warum gerade die Wahl auf diese Programmiersprache fiel. Eines der größten Vorteile ist die Möglichkeit sogenannte interne domänenspezifische Sprachen zu implementieren. Eine DSL ist nichts anderes eine Beschreibungssprache die sich einer wohl definierten Problematik (Domäne) annimmt. Diese Sprache hat noch den Anspruch Turing vollständig zu sein, dennoch zeichnen sich interne DSLs dadurch auch den kompletten Sprachumfang ihrer Wirtsumgebung zu nutzen. So lässt sich das Routing innerhalb einer DSL folgendermaßen beschreiben: 
 
 \lstset{language=Ruby}
-\begin{lstlisting}[caption=, captionpos=b]
-	E@broker = Broker.new do 
+\begin{lstlisting}[caption= Interne Routing-DSL des Brain, captionpos=b]
+	@broker = Broker.new do 
 
-		receiver :living_actor, :address => "127.0.0.1", :port => 9123, :format => :xml, :secure => true
-		receiver :bedroom_actor, :address => "127.0.0.1", :port => 9124, :format => :xml
+		receiver :living_actor, :address => "127.0.0.1", 
+		:port => 9123, :format => :xml, :secure => true
+		
+		receiver :bedroom_actor, :address => "127.0.0.1", 
+		:port => 9124, :format => :xml
+		
 		section :living_room do
 			to :living_actor
 		end
@@ -82,18 +90,18 @@ Die interne Repräsentation des Routings wird innerhalb des Brokers dargestellt,
 \\\\
 Die Eleganz der internen DSLs bringt auch eine Schattenseite mit sich. Während der Implementierung kann es zu einer Vielzahl von Fehlern kommen. Daher sollte in diesem Falle ausschließlich Test-Driven entwickelt werden. Durch die Beschreibung einzelner Testfälle, finden sich genaue Spezifizierungen und Garantieren über die Richtigkeit der Implementierung. Innerhalb von AmbientBrain wurde für das Testing RSpec genutzt, welches ein Ruby-Framework für das sogenannte Behavior Driven Development\footnote{Kurz BDD ist.}. So sehen die Spezifikation für den Broker folgendermaßen aus: 
 
-
-\begin{lstlisting}[caption=, captionpos=b]
+\lstset{language=Ruby}
+\begin{lstlisting}[caption=Beschreibung der RSpec-Tests , captionpos=b]
 	describe Broker do
-	it "holds no sections"
-	it "holds several sections"
-	it "adds several receivers to a section" 
-	it "holds receivers" 
-	it "delegates valid configurations to actors" 
-	it "handles invalid configurations as false" 
-	it "procceses a valid configuration" 
-	it "finds a receiver" 
-end
+		it "holds no sections"
+		it "holds several sections"
+		it "adds several receivers to a section" 
+		it "holds receivers" 
+		it "delegates valid configurations to actors" 
+		it "handles invalid configurations as false" 
+		it "procceses a valid configuration" 
+		it "finds a receiver" 
+	end
 
 \end{lstlisting}
 
