@@ -6,7 +6,7 @@ Nach der Festlegung der Lösungsstrategie die InstantAmbient verfocht musste ein
 Wie im Kapitel der Konfigurationen bereits angesprochen gibt es Sektionen. Da InstantAmbient sowohl für Autos als auch für Hotels funktionieren soll, gibt es eine Allgemeine Konfiguration die elementare Möglichkeiten enthält, die in beiden Umgebungen einstellbar sind. Da diese sozusagen als Globale Konfiguration dienen, werden sie mit dem Start der Anwendung abgefragt. Dies gibt den Benutzer die Möglichkeit von vornherein die ersten Einstellungen vorzunehmen und auf seinem Gerät zu speichern.  
 
 \begin{figure}[H]
-\includegraphics[width=12.5cm]{}
+\includegraphics[width=12.5cm]{MockUps/Registrierung}
 \caption{MockUp der Registrierung}
 \end{figure}
 
@@ -14,7 +14,7 @@ Nachdem der Benutzer diese angelegt hat, wird er in die Umgebungsübersicht gef�
 Des Weiteren hat er die Möglichkeit in der Übersicht im Menü eine neue Umgebung anzulegen oder die Allgemeine Konfiguration zu ändern. Dadurch ist diese von den Umgebungen getrennt veränderbar. Allerdings haben die Benutzer die Möglichkeit die Allgemeinen Konfigurationsdaten für eine Spezifische Umgebung zu ändern ohne die allgemeine Konfiguration zu verändern. 
 
 \begin{figure}[H]
-\includegraphics[width=12.5cm]{}
+\includegraphics[width=12.5cm]{MockUps/Umgebung}
 \caption{MockUp der Umgebungsübersicht}
 \end{figure}
 
@@ -23,10 +23,9 @@ Es gibt also drei verschiedene Hauptansichten. Die Umgebungsübersicht, die Umge
 Des Weiteren wurde auch eine mögliche Konzeption entwickelt wenn sich ein Benutzer zum zweiten mal in einem Hotel befindet, nur das dieses mal die Ausstattung des Zimmers mehr Möglichkeiten bietet. Hierbei sollte das Backend den Client über die neuen Möglichkeiten informieren und dieser Meldet dies dem Benutzer und gibt ihm hierbei gleich die Möglichkeit ein neues Profil für die Umgebung anzulegen. Dieses Konzept ist aber nicht in der Anwendung umgesetzt worden. Da hierbei das Ziel war eine einfache Konfiguration zu erstellen und zu Übertragen.
 
 \begin{figure}[H]
-\includegraphics[width=12.5cm]{}
+\includegraphics[width=6cm]{MockUps/Erweiterung}
 \caption{MockUp der Profilerweiterung}
 \end{figure}
-
 
 \section{Umsetzung} 
 Nach dem die Konzeption und die Benutzerführung anhand der Mock Ups stand, wurde die Anwendung entwickelt. Bei der Verwendung des SDK wurde auf die letzte verbreitete Smartphone Version genommen. Damit die Konfiguration vom Licht oder von der Temperatur eingestellt werden kann wurde ein NumberPicker verwendet. Dies führte ein Problem mit sich, auf das ich im nächsten Abschnitt eingehe. Als Datenbank wurde die von Android bereitgestellte SQLite Datenbank verwendet. Ein wichtiger Bestandteil neben der Oberfläche ist die Bluetoothschnittstelle. \\
