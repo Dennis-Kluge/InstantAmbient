@@ -25,8 +25,6 @@ Umgebung können beispielsweise Gebäude als ganzes, einzelne Räume oder gar Au
 
 Diese Definition beschreibt die Konfiguration als solches sehr generell im folgenden wird diese ergänzt unter anderem einer Beschreibung wie diese aufgebaut ist. 
 
-- Quellen einfügen 
-
 \section{Aufbau}
 Nachdem allgemein Formuliert wurde, wie eine Konfiguration beschrieben ist, wird erläutert wie sich der Aufbau gestaltet. Hierfür werden mehrere Mechanismen erklärt, welche notwendig für die Erstellung einer Konfiguration sind. Diese beschreiben den allgemeinen Aufbau und gehen bis hin zu Konzepten wie der Polymorphie. 
 
@@ -43,7 +41,7 @@ Im folgenden werden all die angesprochenen Strukturierungen in den einzelnen Abs
 \subsection{Attribute und ihre Typen}
 Wie bereits angesprochen sind Attribute die kleinsten Einheit der Repsäsentation von Konfigurationswerten. Dies ist notwendig, da beispielsweise Temperaturen andere Werte annehmen können, als eine Sammlung von unterschiedlichsten Radiosendern für das Autoradio. Dies bietet auch einen guten Einstieg in die Unterscheidung der einzelnen Typen. Damit einzelne Typen exakt zugeordnet werden, gehören diese immer zu einem Attribut. Diese Überlegung ist logisch und repräsentiert die bekannten meachnismen, welche wir beispielsweise aus der Programmierung kennen, so kann das folgende Beispiel folgendermaßen interpretiert werden\footnote{Die hier gezeigte Syntax soll lediglich als Pseudocode dienen und nicht als festes format dienen.}:
 \lstset{language=bash}
-\begin{lstlisting}[caption=, captionpos=b]
+\begin{lstlisting}[caption=Zuweisung eines Attributs als Pseudocode , captionpos=b]
    x = 2
 \end{lstlisting}
 	
@@ -55,26 +53,29 @@ Spannender ist die Frage welche Typen notwendig für die  Speicherung und Verarb
 \\\\
 Die Überlegung zwischen Raumtemperaturen und Fernsehsendern geben erste Hinweise auf notwendige Elementartypen. So sollte eine Temperatur als eine fließkomma Zahl und ein Fernsehsender mit Hilfe dessen Namens, sprich einem Text definiert werden. Zahlen sollten ebenfalls als ganze definiert werden können. So sind schon komplexere Beispiele vorstellbar:
 \lstset{language=bash}
-\begin{lstlisting}[caption=, captionpos=b]
-    temperatur = 21.7
-	sender_1 = "`ARD"'
-	sender_2 = "`ZDF"'
+\begin{lstlisting}[caption=Zuweisung mehrerer Attribute, captionpos=b]
+  temperatur = 21.7
+	sender_1 = "ARD"
+	sender_2 = "ZDF"
 \end{lstlisting}
 
 
 Das letzte Listing zeigt bereits eine neue Klasse von Problemen, so ist die Sammlung einzelner Attribute, welche inhaltlisch zum selben Kontext kompliziert. Die Einführung von Namenskonvetionen zur Sammlung von Attributen, welche zu einer Domäne gehören, wären eine mögliche Lösung. Bei der Mögichkeit von wohl hunderten Radio- und Fernsehsendern, wird schnell klar, dass eine Unübersichtlichkeit garantiert ist. 	Als Konsequenz sollten Elementartypen in der Lage sein gesammelt zu werden. Im Endeffekt beschreibt dieser Mechanismus eine Liste, so ist:
-\begin{equation}
-   sender = ["`ARD"', "`ZDF"', "`OpenTV"', "`OneMoreChannel"'']
-\end{equation}
+
+\lstset{language=bash}
+\begin{lstlisting}[caption=Sammlung mehrerer Attribute in einer Liste, captionpos=b]
+   sender = ["ARD", "ZDF", "OpenTV", "OneMoreChannel"]
+\end{lstlisting}
 
 Im Vergleich zu: 
 
-\begin{equation}
-   	sender_1 = "`ARD"'
-	sender_2 = "`ZDF"'
-	sender_3 = "`OpenTV"'
-	sender_4 = "`OneMoreChannel"'
-\end{equation}
+\lstset{language=bash}
+\begin{lstlisting}[caption=Sammlung mehrerer Werte ohne Liste, captionpos=b]
+  sender_1 = "ARD"
+	sender_2 = "ZDF"
+	sender_3 = "OpenTV"
+	sender_4 = "OneMoreChannel"
+\end{lstlisting}
 
 
 Eine wesentliche Vereinfachung. Für die Zuweisung von Werten, sind keine weiteren Typen notwendig. 
@@ -91,12 +92,13 @@ Der nächste Abschnitt wird sich mit einem übergeordneten Konzept, der Sammlung
 
 \subsection{Sektionen}
 Mit der Einführung von Attributen und deren Typen ist es grundlegend möglich zunächst die notwendigen Werte einer Konfiguration zu speichern. Jedoch wird man bei diesem Konzept mit einer weiteren Klasse von Problemen konfrontiert, die im folgenden Listing gezeigt werden sollen:
-\begin{equation}
-   	temperatur_wohnzimmer = 21
+\lstset{language=bash}
+\begin{lstlisting}[caption=Attributssammlung ohne Sektionen, captionpos=b]
+  temperatur_wohnzimmer = 21
 	temperatur_badezimmer = 23
-	radiosender_badezimmer = ["`Fritz"', "`Radio1"', "`InfoRadio"']
-	tvsender_wohnzimmer = ["`BBC"', "`Phoenix"'']
-\end{equation}
+	radiosender_badezimmer = ["Fritz", "Radio1", "InfoRadio"]
+	tvsender_wohnzimmer = ["BBC", "Phoenix"]
+\end{lstlisting}
 
 Das Beispiel zeigt zwei Dinge, dass Konfigurationen ausserordentlich komplex werden können und einzelne Teile einer Konfiguration offensichtlich einen bestimmten Kontext zugeordnet werden können. 
 \\\\
@@ -104,20 +106,22 @@ Eine Kategorisierung bringt den Vorteil, dass der Inhalt einer Konfiguratioen no
 \\\\
 Die Arten der Klassifikation können sehr unterschiedlich ausfallen. Die Einteilung ist stark von der verwendeten Umgebung und deren Ansprüchen abhängig. Bei einem Hotelzimmer wäre eine mögliche Einteilung folgende: 
 
-\begin{equation}
-   	Wohnzimmer: 
+\lstset{language=bash}
+\begin{lstlisting}[caption=Mögliche Sektionen innerhalb einer Hotelkonfiguratione, captionpos=b]
+  Wohnzimmer: 
 		temperatur = 21
-		tv_sender = ["`ARD"', "`ZDF"'']
+		tv_sender = ["ARD", "ZDF"]
 		helligkeit = 0.7
 	Badezimmer: 
 		wasser_temperatur = 36
-		radio_sender = ["`Fritz"', "`Jazz Radio"'']
+		radio_sender = ["Fritz", "Jazz Radio"]
 		lautstaerke = 0.25
-\end{equation} 
+\end{lstlisting}
 
 Wobei ein Auto folgende belange haben könnte:
 
-\begin{equation}
+\lstset{language=bash}
+\begin{lstlisting}[caption=Mögliche Sektionen innerhalb einer KFZ-Konfiguration, captionpos=b]
    	Fahrersitz:
 		hoehe = 12
 		winkel = 96
@@ -125,19 +129,20 @@ Wobei ein Auto folgende belange haben könnte:
 	Reifen: 
 		vorne = 3.58
 		hinten = 4
-\end{equation} 
+\end{lstlisting}
 
 
 Die Beispiele zeigen, dass das gezeigte Hotelzimmer sich nach den Räumen richtet, wobei im Auto der Innenraum und sicherheitsrelevante Systeme. Es kann verdeutlicht werden, in wie weit die Unterscheidung und Sammlung einen Vorteil bringen. Attribute sind kontextuell voneinander getrennt ohne eine zu starke Hierarschie einzugehen, welche eventuell später schwerer zu bearbeiten wäre.
 \\\\
 Des Weiteren ergeben sich durch die Staffelung weitere interessante Konzepte, besonders in Hinsicht auf sicherheitsrelevante Systeme. Diese sollten bei der Verarbeitung und dem laden der Daten eine besonders hohe priorität genießen. Salopp gesagt, nützt es einen Fahrer nichts bereits seine Lieblingsmusik, wenn die Aussenspiegel noch nicht auf der korrekten Position sind. Die Einführung einer Priorisierung ist auf zwei unterschiedlichen Ebenen vorstellbar, auf ebene der Konfiguration und innerhalb einer Sektion: 
-\begin{equation}
+\lstset{language=bash}
+\begin{lstlisting}[caption=Priorisierung von Sektionen, captionpos=b]
    	Fahrersitz:
-		prioritaet = "`hoch"''
+		prioritaet = "hoch"
 		hoehe = 12
 		winkel = 96
 		temperatur = 32
-\end{equation} 
+\end{lstlisting}
 
 
 Die zweite Möglichkeit ist keine explizite Nennung der Priorisierung innerhalb der Konfiguration, sondern diese automatisch den bearbeitenden Systemen zu überlassen. 
@@ -154,15 +159,17 @@ Der nächste Abschnitt widmet sich dem mehrfachen Vorkommen von attributen.
 \subsection{Polymorphie}
 Sektionen bieten neben der Klassifizierung von Attributen einen weiteren Vorteil, im ursprünglichen Konzept mussten unterschiedliche Temperaturen für einzelne Zimmer folgendermaßen beschrieben werden:
 
-\begin{equation}
-   	wohnzimmer_temperatur = 21
+\lstset{language=bash}
+\begin{lstlisting}[caption=Sammlung von Attributen ohne Polymorphie, captionpos=b]
+  wohnzimmer_temperatur = 21
 	badezimmer_temperatur = 22
-\end{equation} 
+\end{lstlisting}
 
 Wenn sich streng an die aufgestellten Regeln der Sektionen und Attribute gehalten wird, wäre eine beschreibung in diesem Stile möglich: 
 
 
-\begin{equation}
+\lstset{language=bash}
+\begin{lstlisting}[caption=Beispiel einer Konfiguration ohne Polymorphie, captionpos=b]
   temperatur_allgemein = 20
 	
 	Wohnzimmer: 
@@ -171,11 +178,12 @@ Wenn sich streng an die aufgestellten Regeln der Sektionen und Attribute gehalte
 	Badezimmer: 
 		temperatur_badezimmer = 22
 
-\end{equation} 
+\end{lstlisting}
  
 Die Betrachtung der Konfiguration zeigt, dass ein erheblicher Overhead entsteht, alleine bei der Beschreibung der Temperatur. Es gilt global und für alle Zimmer die Eigenschaft der Temperatur, wenn Sektionen nicht genutzt werden, müssen diese unterschieden werden. Jedoch impliziert eine Sektion eine Zugehörigkeit eines Attributs zu einem bestimmten Kontext. Die eingeführte Hierarchie kann eine elementare Erleichterung bringen. Dieses Konzept ist ebenfalls als Polymorphie in der Programmierung bekannt. Das Attribut nimmt je nach dem in welchem Kontext es sich befindet eine andere Form an. Mit Hilfe des Konstrukts, lässt sich das Beispiel vereinfachen: 
 
-\begin{equation}
+\lstset{language=bash}
+\begin{lstlisting}[caption=Beispiel einer Polymporphie basierten Konfiguration, captionpos=b]
   temperatur = 20
 	
 	Wohnzimmer: 
@@ -184,7 +192,7 @@ Die Betrachtung der Konfiguration zeigt, dass ein erheblicher Overhead entsteht,
 	Badezimmer: 
 		temperatur = 22
 
-\end{equation} 
+\end{lstlisting}
 
 Es ist einheitlich die Sprache von einer Temperatur, welche in gewissen Situationen anders sein kann. Eine weitere vereinfachung der Konfiguration.
 
@@ -195,21 +203,23 @@ Mit Hilfer der Polymorphie lassen sich gleiche Attribute in einem unterschiedlic
 
 \subsection{Ableitungen von Konfigurationen}
 Die letzte Stufe bei der Beschreibung des Konfigurationsaufbau, ist die Bildung von Ableitungen. Der Gedanke hinter diesem Konstrukt ist die Widerverwendbarkeit einzelner Teile einer Konfiguration. Ausgehend davon könnte jeder User seine ganz allgemeinen Präferenzen in einer Konfiguration gespeichert haben. Diese Treffen auf nahezu alle Umgebungen zu, so beispielsweise auch auf die Innentemperatur eines Autos zu. So finden sich Redundanzen innerhalb unterschiedlichster Konfigurationen wieder:
-\begin{equation}
+\lstset{language=bash}
+\begin{lstlisting}[caption=Globale Attribute einer Konfiguration, captionpos=b]
 	temperatur = 21
 	helligkeit = 0.3
 	luftfeuchtigkeit = 0.6
 
-\end{equation} 
+\end{lstlisting}
 
 Sind nur einige der Daten die oftmals generell den persönlichen Präferenzen zuzuschreiben sind. In dieser Konsequenz sollte ein weiterer Mechanismus Teil der Konfiguration sein um solche Stammdaten mit einzubeziehen. So kann eine spezielle Konfiguration für ein Auto als eine Erweiterung der Stammdaten angesehen werden:
-\begin{equation}
+\lstset{language=bash}
+\begin{lstlisting}[caption=Ableitung der Globalkonfiguration, captionpos=b]
 	-> globale_konfiguration
 	
 	innnenraum:
 		luftfeuchtifkeit = 0.4
 
-\end{equation} 
+\end{lstlisting}
 
 Alle anderen bereits beschriebenen Konventionen wie etwa die Polymorphie gelten weiterhin. Das Endprodukt der Konfiguration beschreibt ebenfalls nur eine Datei und gibt keine Verlinkung auf andere vor. Jedoch bietet dieses Konzept noch mals eine übergeordnete Ableitung über alle Konfigurationen hinweg bekannt. So ist nicht nur die Einteilung mit Hilfe von Sektionen, sondern auch Ableitungen möglich. 
 
@@ -219,14 +229,14 @@ Eine Konfiguration lässt sich von einer anderen Ableiten. Alle Konzepte bleiben
 \end{mydef}
 
 
-\subsection{Datenformate}
+\section{Datenformate}
 Die in diesen Kapitel verwendete Syntax zur Beschreibung der Konfiguration wurde zu Zwecken der Verständlichkeit eingeführt. Des Weiteren wäre eine vorzeitige Entscheidung für das verwendete Datenformat eine Einschränkung in der Konzeption des Formats. In diesem Abschnitt werden unterschiedliche Repräsentationen einer Konfiguration in XML und JSON vorgestellt. Diese sind die gängigsten Formate im Austausch von Daten. Im folgenden werden die einzelnen Darstellungen exemplarisch gezeigt und diskutiert. Ziel ist es für InstantAmbient eine passende Form der Datenrepräsentation zu finden. 
 
 \subsection{XML}
 XML ist wohl das bekannteste Format im Austauch von Daten es wird vielseitig eingesetzt und eine große Anzahl von Technologien basieren darauf. Die Tools und das Verständnis ist ausgereift und XML selbst ist für den generischen Ansatz von Konfigurationsbeschreibungen prädestiniert. Eine Beschreibung einer Beispielkonfiguration würde folgendermaßen aussehen: 
 
 \lstset{language=XML}
-\begin{lstlisting}[caption=XML Konfiguration, captionpos=b]
+\begin{lstlisting}[caption=XML-Konfiguration, captionpos=b]
 	<configuration>
 		<!-- Deklaration einer Zahl -->
 		<number name="temperatur">21</number>
@@ -248,11 +258,11 @@ XML ist wohl das bekannteste Format im Austauch von Daten es wird vielseitig ein
 
 Das Beispiel soll ein Gefühl dafür erzeugen, wie eine Konfiguration im XML-Format aussehen könnte. Alle nötigen Vorgaben sind eingehalten worden. Attribute werden als solche abgebildet wobei der Name der Node den Typen oder eine Sektion beschreibt. Die Beschreibung ist relativ intuitiv und schnell zu erfassen. Die Hierarchien sind flach und schnell zu parsen. Die Nutzung von XML würde nur wenige Tücken mit sich bringen, so muss der Typ einzeln als Node-Name spezifiziert werden und das Attribut findet sich innerhalb des "`name"'. Das ist wohl die größte Schwäche. 
 
-### JSON 
+\subsection{JSON}
 Als zweiter möglicher Formatkandidat, wurde sich für JSON entschieden. Dieses wird besonders im Web zur Serialisierung von Daten eingesetzt und zeichnet sich durch eine einfache Lesbarkeit und bereits spezifizierten Datentypen aus. Ein Beispiel zeigt die Eigenschaften von JSON:
 
 \lstset{language=bash}
-\begin{lstlisting}[caption=JSON Konfiguration, captionpos=b]
+\begin{lstlisting}[caption=JSON-Konfiguration, captionpos=b]
 {
 	"temperatur" : 21,
 	"willkommens_nachricht" : "Herzlich Wollkomen", 
@@ -266,7 +276,7 @@ Als zweiter möglicher Formatkandidat, wurde sich für JSON entschieden. Dieses 
 
 Es wurde exakt das gleiche Beispiel wie zuvor im Abschnitt zu XML gewählt, es ist ersichtlich, dass JSON insgesamt schmaler und einfacher zu lesen ist. Des Weiteren sind die einzelnen Datentypen erkennbar.
 
-\subsubsection{Formatentscheidung}
+\subsection{Formatentscheidung}
 Eine Entscheidung für ein Format bringt immer Tücken mit sich und es müssen vorsichtig Vor- und Nachteile abgewägt werden. Wünschenswert wäre eine Multiformat-Unterstützung da im Endeffekt XML und JSON die gleichen Belange im Grunde nur unterschiedlich codieren. Im Falle von InstantAmbient wird sich für JSON entschieden. Es gibt einige entscheidende Vorteile neben den fest integrierten Datentypen, sind die Dateien kompakter und es gibt eine Reihe an performanten Parsern. Insgesamt tritt weniger Overhead auf wie bei klassichen Markup-Sprachen. Diese Entscheidung soll jedoch kein Dogma sein, so wird die Archtiektur es vorsehen, dass diese Formate änderbar sind. 
 
 \section{Weitere Konzepte}
@@ -283,9 +293,10 @@ Ausgehend von den Voerhersagen zu neuen Profilen und der Intention, dass Systeme
 
 \subsection{Einführung neuer Typen}
 Die letzte mögliche Erwägung ist die Einführung eines neuen Datentyps. Wie gezeigt können Konfigurationen schon jetzt dynamisch und skalierend angelegt werden. Die Unterscheidung zwischen Number, String und Collections sind hierfür elementar. Die Praxis wird zeigen ob ein Boolean-Typ von nöten ist, welcher in der Lage ist, einfache Zustände darzustellen.
-\begin{equation}
+\lstset{language=bash}
+\begin{lstlisting}[caption=Möglicher Boolean-Typ, captionpos=b]
 	active = true
-\end{equation} 
+\end{lstlisting}
 
 In Zukunft könnten hiermit größere Erleicherungen möglich sein. Im allgemeinen kann nur der Einsatz und der Umgang mit Konfigurationen zeigen, welche Dinge notwendig sind und noch gebraucht werden. 
 
