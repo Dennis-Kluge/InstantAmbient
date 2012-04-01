@@ -10,7 +10,7 @@ In der heutigen Zeit wird der Drang nach der automatischen Bedienung der Heim un
 Einsatz kommen. 
 
 ### \subsection{Heimautomatisierung}
-In diesem Abschnitt wird ein kurzer Überblick über verschieden Heimautomatisierungssysteme aufgezeigt. Bei der Heimautomatisierung werden viele Systeme zur Überwachung des Hauses eingesetzt um gegebenenfalls Einbrecher zu ertappen. Des Weiteren werden sie zur Lichtsteuerung und um Energie sparen, so dass die Heizung automatisch reguliert wird. Der Unterschied der meisten Systeme liegt in der Bedienung und dem Aufwand der Installation des Systems.  
+In diesem Abschnitt wird ein kurzer Überblick über verschieden Systeme zur Heimautomatisierung aufgezeigt. Bei der Heimautomatisierung werden viele Systeme zur Überwachung des Hauses eingesetzt um gegebenenfalls Einbrecher zu ertappen. Des Weiteren werden sie zur Lichtsteuerung und um Energie sparen, so dass die Heizung automatisch reguliert wird. Der Unterschied der meisten Systeme liegt in der Bedienung und dem Aufwand der Installation des Systems.  
 
 #### \subsubsection{FS20-System}
 Das FS20-System ist ein Funk-Haussteuerungssystem von der Firma ELV und im Niedrigpreissektor das erfolgreichste System. Es besteht aus einer Vielzahl von Empfänger, Sendern und Sensoren. Man hat die Möglichkeit bequem von seinem PC aus das System zu programmieren und mittels drücken verschiedener Taster die konfigurieren Abläufe durchführen zu lassen. Das System kann über das Telefonnetz sowie über den Rechner gesteuert werden. Dieses System bringt natürlich auch Nachteile mit sich. So ist das System nur in einer Richtung ansprechbar. Dies bedeutet, dass ein Sender kein Empfangssignal zurückerhält 
@@ -21,15 +21,15 @@ Das HomeMatic System arbeitet wie das FS20-System mittels Funkübertragung. Es m
 Zentrale, falls man einen erweiterten Funktionsumfang erhalten möchte, oder komplexe Automatisierungsabläufe konfiguriert. Es besteht hierbei die Möglichkeit verschieden Signale zu konfigurieren die bestimmte Einstellungen haben und diese mittels Schalten zu aktivieren. 
 Das System kann sowohl über eine Weboberfläche, als auch über das iPhone, dem Telefon und über die Fernbedienung bedient werden. Die Übertragung erfolgt bidirektional somit wird sichergestellt das es eine Rückmeldung geben kann.
 \\
-HomeMatic ist nicht im niedrigpreissektor angesiedelt.
+HomeMatic ist nicht im Niedrigpreissektor angesiedelt.
 
 #### \subsubsection{XComfort Funk-System}
 Das XComfort Funk-System ist ein sehr hochwertiges System. 
-Bei diesem System sind allerdings Kenntnisse im Umgang mit dem Pc nötig, da dieses System mittels einer Konfiguratiosnsoftware und eines 
+Bei diesem System sind allerdings Kenntnisse im Umgang mit dem Pc nötig, da dieses System mittels einer Konfigurationssoftware und eines 
 Programmiergerätes konfiguriert werden muss. Bei Verwendung eines Smartphones oder Tablets zum Zugriff auf das System ist ein Server nötig und eine weitere Software.
 
 #### \subsubsection{EIB System}
-Das EIB System setzt die Verwendugn eines integrieten Bussystems im Gebäude voraus. Dabei lassen sich die Geräte zenztral und dezentral bedienen und Überwachen. 
+Das EIB System setzt die Verwendung eines integrierten Bussystems im Gebäude voraus. Dabei lassen sich die Geräte zentral und dezentral bedienen und Überwachen. 
 
 #### \subsubsection{Automobiel} 
 Im Bereich des Automobils spielt der Autoschlüssel einer immer wichtigere Rolle. Das heute in mehreren Autos verwendete System Keyless Go, ist ein System das dem Fahrer ermöglich sein Auto zu öffnen und zu starten ohne eine aktive Benutzung des Autoschlüssels. Hersteller die dieses System bei ihren Autos integriert haben nutzen auch den Autoschlüssel als Datenspeicher. Diese haben Informationen über die Richtige Sitzposition, die Außenspiegel, die Temperatur und sogar den Lieblingssender des des Fahrers. Wenn sich der Fahrer also seinem Auto nähert und dieses öffnet werden diese von ihm vorgenommen Einstellungen automatisch eingestellt. 
