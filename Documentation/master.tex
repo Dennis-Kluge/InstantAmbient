@@ -1,7 +1,4 @@
-\textbf{}\documentclass[11pt, a4paper]{book}
-
-% Test mit dem a5 format
-%\textbf{}\usepackage[a5paper]{geometry}
+\textbf{}\documentclass[11pt, a4paper]{report}
 
 % Silbentrennung
 \usepackage[ngerman]{babel}
@@ -98,6 +95,7 @@
 \include{chap3/chap3}
 % Konfiguration
 \include{chap6/chap6}
+% Loesungen
 \include{chap4/chap4}
 % Architektur und Technologien
 \include{chap5/chap5}
@@ -107,21 +105,12 @@
 \include{chap8/chap8}
 % Ausblick und Zusammenfassung
 \include{chap9/chap9}
-
-%Anhang
-%\appendix
-
 \newpage
-% Glossar
-%\printglossaries
-%\addcontentsline{toc}{chapter}{Glossar}
-% Abbildungsverzeichnis
-%\listoffigures
+
 
 % Abbildungsverzeichnis
 \listoffigures
 \addcontentsline{toc}{chapter}{Abbildungsverzeichnis}
-%\chapter{Abbildungsverzeichnis}
 
 %Code-Verzeichnis
 \renewcommand{\lstlistlistingname}{Verzeichnis der Quelltextauszüge}
@@ -134,8 +123,4 @@
 \bibliographystyle{alpha}
 \addcontentsline{toc}{section}{Literaturverzeichnis}
 
-% Index
-%\clearpage
-%\addcontentsline{toc}{chapter}{Index}
-%\printindex
 \end{document}
