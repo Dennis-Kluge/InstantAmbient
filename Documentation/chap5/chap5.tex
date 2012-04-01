@@ -1,4 +1,4 @@
-\chapter{Architektur & Technologien}
+\chapter{Architektur \& Technologien}
 Nachdem sich das letzte Kapitel in einer abstrakten Form die möglichen Ansätze diskutiert und die Entscheidung für den Client orientierten Aspekt gefallen wurde, konzentrieren sich die nächsten Absätze mit der Architektur und Technologieauswahl. 
 Hierbei ist wichtig zu erwähnen, dass sich die folgenden Entscheidungen auf das Proof of Concept beziehen und wohl besonders im Technologischen Umfeld diskutiert werden können.
 
@@ -12,8 +12,8 @@ Das Backend ist ausschließlich mit der Verarbeitung von Konfigurationen beschä
 Zunächst soll ein Überblick zur Architektur und den einzelnen Komponenten gegeben werden. Die folgende Grafik zeigt die Bestandteile und ihre Relationen untereinander:
 
 \begin{figure}[H]
-\includegraphics[width=12.5cm]{}
-\caption{}
+\includegraphics[width=12.5cm]{images/architecture}
+\caption{Teilkomponenten und deren Relationen}
 \end{figure}
 
 Am offensichtlichsten ist die Anzahl der einzelnen Komponenten, welche innerhalb von InstantAmbient arbeiten. Des Weiteren Kommunizieren diese lediglich mit einem Vorgänger. Die Kette der Konfigurationsbereitstellung beginnt mit dem Smartphone bzw. der bereitgestellten App. Hier erstellt der User nach seinen individuellen Wünschen eine Konfiguration für unterschiedlichste Umgebungen. Soll diese beispielsweise vor der Fahrt mit einem Mietwagen übertragen werden, verbindet sich der Client mit dem Connector\footnote{In Zukunft auch InstantConnector genannt.}, wird die Konfiguration mit Hilfe von Bluetooth übertragen. Eine genauere Erläuterung der Technikauswahl ist in den nächsten Abschnitten zu finden. Der Connector an sich ist nur dafür zuständig die Daten entgegenzunehmen und diese zu validieren. Die eigentliche Prozessierung und Verteilung der Konfiguration findet im "`Brain"'\footnote{Zugegeben ist die Namenswahl ein wenig mutig, aber der Großteil der Backend-Logik befindet sich in diesem Modul.} statt. Für diesen Zweck überträgt der Connector die empfangene und validierte Konfiguration via TCP/IP zum Brain. Dieses unterhält mit Hilfe verschiedenen Mechanismen ein Verständnis welche Teile einer Konfigurationen zum Actor verschickt werden müssen. Hierbei wurde sich dafür entschieden, dass Aktoren immer für eine bestimmte Sektion der Konfiguration zuständig sind. Daher routet das Brain Sektionen zu einzelnen Aktoren. Es kann durchaus sein, dass ein Actor nur bestimmte Dateiformate unterstützt, daher ist im Brain eine Konvertierung beispielsweise von JSON zu XML vorgesehen.
@@ -67,8 +67,8 @@ Im Grunde empfängt der Actor einen validen und eventuell konvertierten Teil der
 Die vorgestellte Architektur ist kein starres Konstrukt, sondern auch dafür vorgesehen erweitert zu werden. So sind eine Vielzahl an weiteren Services denkbar, wie beispielsweise die Integration von Authentifizierungs- oder Webservices. 
 
 \begin{figure}[H]
-\includegraphics[width=12.5cm]{}
-\caption{}
+\includegraphics[width=12.5cm]{images/extended_architecture}
+\caption{Erweiterte Architektur mit Web- und Authentifizierungsservice}
 \end{figure}
 
 Da z.B. bei der Authentifizierung nur das Brain als wesentliche Instanz mit den Service kommunizieren muss, steigt die Komplexität nur in diesem Teil der Anwendung. Damit soll gezeigt werden, dass die Wahl mehrere Teilsysteme zu nutzen den Vorteil hat, das System einfach zu erweitern und die Bedürfnisse einzelner Szenarien anzupassen. 
@@ -94,14 +94,18 @@ Zunächst soll der Begriff NFC genauer beleuchtet werden. Im genaueren Technolog
 
   \begin{table}
      \centering
-     \begin{tabular}{ll}
-      \textbf{Eigenschaften} & \textbf{NFC}  & \textbf{Bluetooth} \\
-       Bandbreite          				 	& -							& ++   \\
-       Platformen       					& Android, Nokia			& iOS, Android, Blackberry, ...   \\
-       Verfügbare Implementierungen        	& +	        				& +   \\
-     \end{tabular}
+     \begin{tabular}{| l | c | c |}
+			\hline
+      \textbf{Eigenschaften} & \textbf{NFC}  & \textbf{Bluetooth} \\ \hline
+       Bandbreite  & -	& + \\ \hline
+       Platformen  & Android, Nokia & iOS, Android, Blackberry...   \\ \hline
+       Verbreitung & + & +   \\ \hline
+			 Sicherheit  & + & + \\ \hline
+			 Implementierung  & - & + \\ \hline
+			
+     \end{tabular} 
  
-     \caption{Vergleich NFC und Bluetooth}
+     \caption{Vergleich zwischen NFC und Bluetooth }
  
    \end{table}
 
