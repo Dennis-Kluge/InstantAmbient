@@ -24,37 +24,32 @@ module AmbientActor
       @serial_port.sync = true
     end
 
-    def send(values)      
+    def send(values)         
       values.each do |k, v|
-        v.each do |value|      
-          value.each do |va, atr|
-            case va
+        case k
 
-            when "light"
-              @serial_port.write("0")
-              @serial_port.write(extract_value(atr))   
+        when "light"
+          @serial_port.write("0")
+          @serial_port.write(extract_value(v))   
             
-            when "red"
-              @serial_port.write("1")
-              @serial_port.write(extract_value(atr))          
+        when "red"
+          @serial_port.write("1")
+          @serial_port.write(extract_value(v))          
             
-            when "green"
-              @serial_port.write("2")
-              @serial_port.write(extract_value(atr))
+        when "green"
+          @serial_port.write("2")
+          @serial_port.write(extract_value(v))
             
-            when "blue"
-              @serial_port.write("3")
-              @serial_port.write(extract_value(atr))
+        when "blue"
+          @serial_port.write("3")
+          @serial_port.write(extract_value(v))
             
-            end    
-          end          
-        end
-      end
+        end    
+      end                
     end
 
     def extract_value(value)
-      calculation = value.to_f * 10
-      puts "CALC: #{calculation}"
+      calculation = value.to_f * 10      
       if calculation > 9
         "9"
       else
