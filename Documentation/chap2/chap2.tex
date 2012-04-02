@@ -1,7 +1,7 @@
 \chapter{Die Idee von konfigurationsbasierten Systemen}
 
-Dieses Kapitel widmet sich der Gesamtidee von InstantAmbient und diskutiert die Anwendungsszenarien und Nutzen des Systems. Des Weiteren soll aufgezeigt werden welchen 
-Nutzen konfigurationsbasierte Systeme mit sich bringen. 
+Dieses Kapitel widmet sich der Gesamtidee von InstantAmbient und diskutiert die Anwendungsszenarien und den Nutzen des Systems. Des Weiteren soll aufgezeigt werden, welche 
+Vorteile konfigurationsbasierte Systeme mit sich bringen. 
 
 \section{Die Vision}
 Auf die Vision hinter InstantAmbient wurde bereits in der Einführung kurz eingegangen. Es geht darum ein System so zu konzipieren, mit dessen Hilfe es möglich sein soll 
@@ -10,12 +10,12 @@ bereits ausgiebig konfigurationsbasierte Systeme nutzt.
 \\\\
 Wir begleiten einen Tag lang Frau Schröter ihres Zeichens Senior Software Developer bei IBM Deutschland und gerade auf Geschäftsreise in London für eine Schulung zur 
 Entwicklung mit Ruby on Rails. Sie nutzt seit geringerer Zeit konfigurationsbasierte Systeme und wendet diese so oft wie möglich an. Nach der Ankunft in Haethrow beschließt 
-sie der Mobilität wegen sich ein Mietwagen bei dem bekannteren Anbieter RentX zu nehmen. Dieser rüstet seit geraumer Zeit eine Vielzahl seiner Fahrzeuge mit 
+sie der Mobilität wegen sich ein Mietwagen bei dem bekannteren Anbieter RentX zu nehmen. Dieser rüstet seit einiger Zeit eine Vielzahl seiner Fahrzeuge mit 
 konfigurationsbasierten Systemen aus. Nachdem das Auto angemietet wurde und Frau Schröter ihre Schlüssel erhielt, brauch sie nur noch einzusteigen und mit Hilfe der 
-integrierten NFC-Schnittstelle\footnote{Welche genau in Frage kommen, sind Teil der Fragestellung.} des Automobils ihre persönliche Konfiguration mit dem Smartphone und einer 
+integrierten NFC-Schnittstelle\footnote{Welche genau in Frage kommen, ist Teil der Fragestellung.} des Automobils ihre persönliche Konfiguration mit dem Smartphone und einer 
 passenden App überspielen. Da sie bereits mehrere Male mit einem Wagen gleichen Typs gefahren ist, war eine passende Konfiguration vorhanden. So stellt sich vollautomatisch
-neben den Außenspiegeln der Sitz auf die korrekte Position ein und im Autoradio läuft der preferierte Musikstream von Frau Schröter mit entspannenden Jazzklängen. Natürlich
-stellt sich die Klimaautomaik auf eine mollige Temperatur von 21°C ein. Perfekte Umstände für eine sichere Fahrt zum Hotel.
+neben den Außenspiegeln der Sitz auf die korrekte Position ein und im Autoradio läuft der präferierte Musikstream von Frau Schröter mit entspannenden Jazzklängen. Natürlich
+stellt sich die Klimaautomatik auf eine mollige Temperatur von 21°C ein. Perfekte Umstände für eine sichere Fahrt zum Hotel.
 \\\\
 Standesgemäß wurde das Hotelzimmer bereits Online gebucht und bezahlt. Als Zugangsschlüssel wurde ein Key generiert, welcher in eine bestehende oder neue Konfiguration 
 eingebettet werden kann. So ist der unter Umständen lästige Check-In etwa durch Zeitdruck nicht mehr notwendig. Das Zimmer muss nur noch bezogen werden. Da Frau Schröter das
@@ -33,8 +33,8 @@ Nach einem langen Arbeitstag kehrt Frau Schröter zurück in ihr Hotelzimmer, da
 genießt, ändert sie die Lichteinstellungen im Schlafzimmer und lässt sich ein Bad ein. 
 \\\\
 Zugegeben ist die hier gezeigte Vision sehr idealisiert dargestellt. Sie soll aber zeigen in welchen Umfang konfigurationsbasierte Systeme eingesetzt werden können. So sind 
-wie gezeigt unterschiedlichste Szenarien vorstellbar, welche sich durchaus miteinander kombinieren lassen. Die kleine Geschichte rund um Frau Schröter soll einen Einblick und 
-ein Verständnis dafür liefern in welcher Art und Weise diese Systeme agieren können.  
+wie gezeigt unterschiedlichste Szenerien vorstellbar, welche sich durchaus miteinander kombinieren lassen. Die kleine Geschichte rund um Frau Schröter soll einen Einblick und 
+ein Verständnis dafür liefern, in welcher Art und Weise diese Systeme agieren können.  
 Um es vorweg zu nehmen derzeit gibt es kein einziges System, welches diese Aufgaben erfüllen kann. Auch ist es möglich einen ersten Einblick in die mögliche 
 Komplexität\footnote{Eine der Zentralfragen.} einer generischen Antwort zu zeigen. 
 Teile der Vision werden im Laufe dieser Arbeit extrahiert, und zu einem eigenen Lösungsmöglichkeit zusammengefügt. Am Ende soll ein Proof of Conecpt den Entwurf validieren. 
@@ -52,19 +52,19 @@ Hotelketten können einen besonderen Service anbieten. Neben der individuellen G
 bereits vorab zu übertragen. Bei weiterer Betrachtung ist es sogar möglich zu sagen, dass die Bedienung von Multimedia-Geräten nichts anderes als eine Änderung der aktuellen
 Konfiguration ist. Die Wege welche hier bestritten werden können, sind durchaus vielseitig. 
 \\\\
-Zu guter letzt ist es möglich auch exotischere Beispiele zu finden wie etwa die Konfiguration von Schreibtischen und den damit verbundenen Netzwerken zu ermöglichen. 
+Zu guter Letzt ist es möglich auch exotischere Beispiele zu finden wie etwa die Konfiguration von Schreibtischen und den damit verbundenen Netzwerken zu ermöglichen. 
 Die Möglichkeiten können bis zum Intelligenten Energiemanagement und darüber hinaus gehen.
 Warum ein Forschungsbemühen in diese Richtung angebracht ist, liegt auf der Hand. So können eine Vielzahl an Parteien einen praktischen Nutzen durch die Anwendung von 
 konfigurationsbasierten Systemen ziehen.
 
 \section{Gewählte Ansätze von InstantAmbient}
-Innerhalb der Projektarbeit ist es alleine aus zeitlichen Gründen die Behandlung aller einzelnen Teilaspekte nicht schaffbar. So wird sich innerhalb der nächsten Kapitel 
+Innerhalb der Projektarbeit ist es alleine aus zeitlichen Gründen die Behandlung aller einzelnen Teilaspekte nicht durchführbar. So wird sich innerhalb der nächsten Kapitel 
 speziell auf die Teilbereiche der Automobile und Hotelzimmer gestützt, jedoch immer mit dem Anspruch eine generischen Ansatz zu produzieren, welcher sich auf neue 
 Anwendungsgebiete ausweiten lässt. Im besonderen Hauptaugenmerk liegt der Aufbau und die Gestaltung von Konfigurationsdateien, wobei eine Vielzahl von unterschiedlichen 
 Mechanismen berücksichtigt werden, sowie die Konzipierung der App und Backenddienste\footnote{Damit sind all die Dienste gemeint, welche die Konfigurationen entgegen nehmen 
 und weiterverarbeiten.}. Im Fokus stehen die Probleme der Informations- und Datenverarbeitung, weiterführende Überlegungen wie etwa zu Geschäftsmodellen werden nicht 
 angestellt. 
 \\\\
-Das nächste Kapitel widmet sich zunächst der Betrachtung bestehender Lösungen um anschließend vollends die Lösungsstrategie von InstantAbient aufzuzeigen. Hierfür wird 
+Das nächste Kapitel widmet sich zunächst der Betrachtung bestehender Lösungen um anschließend vollendsw die Lösungsstrategie von InstantAbient aufzuzeigen. Hierfür wird 
 zunächst die Gestaltung von Konfigurationen diskutiert um anschließend die datenverarbeitenden Mechanismen zu konstruieren. 
 

@@ -29,6 +29,8 @@
 
 % Bibtex
 %\usepackage{natbib}
+\usepackage{biblatex}
+\bibliography{bibliography.bib}
 \usepackage{amsrefs}
 
 % Verweise in PDF		
@@ -119,8 +121,7 @@
 
 % Bibtex mit der externen Datei bibliography.bib
 \nocite{*}
-\bibliography{bibliography}
-\bibliographystyle{alpha}
-\addcontentsline{toc}{section}{Literaturverzeichnis}
+\printbibliography
+\addcontentsline{toc}{chapter}{Literaturverzeichnis}
 
 \end{document}
