@@ -25,10 +25,10 @@ Die folgenden Abschnitte, werden die Komponenten genauer erläutern.
 
 \section{Aufbau Client}
 
-Wie Bereits im Überblick angesprochen, wurde bei der Umsetzung für den Client eine Androide-App entwickelt. Diese muss dem Benutzer ein leichten einstieg in die Anwendung geben, daher sind die Wege zum in der App kurz gehalten. Näheres dazu folgt im Kapitel über den Client. 
-Des Weiteren ist es so, dass der Client als Datenspeicher dient um die einbestellen Konfigurationen zu speichern. Hier bei wurde auf die in Android enthaltene SQLite Datenbank zurückgegriffen. 
-Neben dem speichern der Daten und dem Bereitstellen einer Benutzerschnittstelle für den User, generiert der Client aus den Konfigurationsdaten eine JSON Objekt. Dieses wird nach dem Aufbau einer Bluetoothverbindung an den Connector gesendet. 
-Dies geschieht alles im Hintergrund, da der User so wenig wie möglich davon mitbekommen soll. Dabei müssen allerdings verschiedene Aspekte betrachtet werden, wodurch folgende Fragen entstehen: Wann soll der Client die Daten Übertragen? Wann soll der Client eine neue Umgebung anlegen? Soll der Client eine Umgebung selbstständig anlegen. 
+Wie Bereits im Überblick angesprochen, wurde bei der Umsetzung für den Client eine Android-App entwickelt. Diese muss dem Benutzer ein leichten einstieg in die Anwendung geben, daher sind die Wege in der App kurz gehalten. Näheres dazu folgt im Kapitel über den Client. 
+Des Weiteren ist es so, dass der Client als Datenspeicher dient um die Konfigurationen zu speichern. Hier bei wurde auf die in Android enthaltene SQLite Datenbank zurückgegriffen. 
+Neben dem speichern der Daten und dem Bereitstellen einer Benutzerschnittstelle für den User, generiert der Client aus den Konfigurationsdaten ein JSON Objekt. Dieses wird nach dem Aufbau einer Bluetoothverbindung an den Connector gesendet. 
+Dies geschieht alles im Hintergrund, da der User so wenig wie möglich davon mitbekommen soll. Dabei müssen allerdings verschiedene Aspekte betrachtet werden, wodurch folgende Fragen entstehen: Wann soll der Client die Daten Übertragen? Wann soll der Client eine neue Umgebung anlegen? Soll der Client eine Umgebung selbstständig anlegen? 
 \\\\
 Es ist natürlich am Benutzerfreundlichsten für den User wenn er so wenig wie möglich selber machen muss, ohne das die Anwendung in bevormundet. 
 Daher ist es so, dass man beim initialen Start der Anwendung seine Allgemeine Konfiguration eingeben kann. 
@@ -41,16 +41,16 @@ Wie bereits im Überblick erläutert, besteht das Backend aus mehreren untereina
 Im folgenden wird näher auf die Komponenten eingegangen ohne auf die spezifische Implementierung einzugehen.
 
 \subsection{Connector}
-Die Vorgänge innerhalb des Connectors sind unspektakulär. Bewusst soll diese Komponente einfach und leichtgewichtig gehalten werden. Mit Hilfe von Bluetooth, genauer gesagt dem Protokoll SPP, kann der Client seine serialisierte Konfiguration übertragen. Als erster Bearbeitungsschritt wird die Validität der Daten geprüft. Korrupte Dateien sollen so früh wie möglich aussortiert werden um die Sicherheit des Systems zu gewährleisten. In der Übersicht zur Gesamtübersicht wurde bewusst ein weiterer Bearbeitungsschritt nicht genannt. In vielen Fällen möchte das Brain eventuell wissen von welchem Connector die Daten kommen. Dies gilt besonders bei Szenarien wie etwa Hotels, Konfigurationen müssen eindeutig einer Umgebung zugeordnet sein. Daher modifiziert der Connector als zweiten Schritt die Konfiguration und fügt spezifische Informationen zur Umgebung zu. In den meisten Fällen reicht eine ID zur Identifikation. Als letzter Schritt wird das Brain mit der modifizierten Konfiguration kontaktiert und die Daten gesendet. 
+Die Vorgänge innerhalb des Connectors sind unspektakulär. Bewusst soll diese Komponente einfach und leichtgewichtig gehalten werden. Mit Hilfe von Bluetooth, genauer gesagt dem Protokoll SPP, kann der Client seine serialisierte Konfiguration übertragen. Als erster Bearbeitungsschritt wird die Validität der Daten geprüft. Korrupte Dateien sollen so früh wie möglich aussortiert werden um die Sicherheit des Systems zu gewährleisten. In der Übersicht zum Gesamtsystem wurde bewusst ein weiterer Bearbeitungsschritt nicht genannt. In vielen Fällen möchte das Brain eventuell wissen von welchem Connector die Daten kommen. Dies gilt besonders bei Szenarien wie etwa Hotels, Konfigurationen müssen eindeutig einer Umgebung zugeordnet sein. Daher modifiziert der Connector als zweiten Schritt die Konfiguration und fügt spezifische Informationen zur Umgebung zu. In den meisten Fällen reicht eine ID zur Identifikation. Als letzter Schritt wird das Brain mit der modifizierten Konfiguration kontaktiert und die Daten gesendet. 
 
 \subsection{Brain}
 
 Das Brain empfängt die valide Konfiguration mit Hilfe von TCP/IP. Nahezu jedes Systems stellt diese Schnittstellen bereit, viele Systeme und Architekturen basieren auf diese Kommunikationsmittel.
 Die Hauptaufgabe des Brain liegt im Routing der Konfiguration. Hier stellen sich zwei wesentliche Fragen: Wie werden welche Daten geroutet, welche Formate besitzen diese? Und wie wird das Routing selbst abgebildet und konfiguriert? 
 \\\\
-Wie bereits angesprochen wird bei dem Routing angenommen, dass bestimmte Aktoren für einzelne Sektionen zuständig sind. Das heisst, dass ein Aktor die Teilkonfiguration beispielsweise für das Badezimmer empfängt. Dabei können mehrere Aktoren die Teilkonfiguration empfangen. Da in vielen Szenarien davon ausgegangen werden muss, dass nicht jeder Actor JSON spricht, sollte vor dem Senden der Daten eine mögliche Konvertierung stattfinden. Anfangs wird ebenfalls angenommen, dass die Aktoren über eine TCP/IP-Schnittstelle verfügen. 
+Wie bereits angesprochen wird bei dem Routing angenommen, dass bestimmte Aktoren für einzelne Sektionen zuständig sind. Das heisst, dass ein Aktor die Teilkonfiguration beispielsweise für das Badezimmer empfängt. Dabei können mehrere Aktoren die Teilkonfiguration empfangen. Da in vielen Szenarien davon ausgegangen werden muss, dass nicht jeder Actor JSON spricht, sollte vor dem Senden der Daten eine mögliche Konvertierung stattfinden. Des Weiteren wird eine TCP/IP-Schnittstelle beim Aktor vorausgesetzt. 
 \\\\
-Des Weiteren ist die wohl größte Herausforderung auf einer eleganten Art und Weise das Routing darzustellen. Hierfür eignen sich entweder weitere Konfigurationsdateien, welche schnell unübersichtlich werden können oder auch domainspezifische Sprachen. Um ein wenig vorweg zugreifen wurde im Proof of Concept sich für die zweite Alternative entschieden. Das Routing muss im wesentlichen Kenntnisse über zwei Aspekte haben: 
+Des Weiteren ist die wohl größte Herausforderung auf einer eleganten Art und Weise das Routing darzustellen. Hierfür eignen sich entweder weitere Konfigurationsdateien, welche schnell unübersichtlich werden können oder auch domänspezifische Sprachen. Um ein wenig vorweg zugreifen wurde im Proof of Concept sich für die zweite Alternative entschieden. Das Routing muss im wesentlichen Kenntnisse über zwei Aspekte haben: 
 
 \begin{enumerate}
      \item Der Definition von erreichbaren Aktoren
@@ -110,9 +110,8 @@ Zunächst soll der Begriff NFC genauer beleuchtet werden. Im genaueren Technolog
    \end{table}
 
 \\\\
-Neben den in der Tabelle aufgezeigten Vorteilen, bringen derzeitige NFC-Implementierungen mit sich. Die Größe der übertragenen Nachrichten müssen einer bestimmten Größe entsprechen, bei libnfc beträgt diese 53 Byte. Dies reicht unter Umständen für kleinere Konfigurationen aus, wenn aber auch Listen von TV-Sendern etc. mitgeschickt werden und UTF-16 codiert sind, werden diese Grenzen schnell gesprengt. 
+Neben den in der Tabelle aufgezeigten Vorteilen, bringen derzeitige NFC-Implementierungen einen entscheidenden Nachteil mit sich. Die Größe der übertragenen Nachrichten müssen einer bestimmten Größe entsprechen, bei libnfc beträgt diese 53 Byte. Dies reicht unter Umständen für kleinere Konfigurationen aus, wenn aber auch Listen von TV-Sendern etc. mitgeschickt werden und UTF-16 codiert sind, werden diese Grenzen schnell gesprengt. 
 Wie in der Architekturbeschreibung bereits angemerkt, ist die hier getroffene Wahl kein Dogma für das komplette Projekt, sondern der Connector kann durch seine leichtgewichtige Konzeption jederzeit ohne Probleme ausgetauscht werden.
-
 
 \subsection{Connector}
 
@@ -123,7 +122,7 @@ Die Kommunikation zum Brain basiert auf einfachen TCP-Sockets, da diese ebenfall
 
 \subsection{Brain}
 
-Das Brain bildet die zentrale Instanz des Backends. Es empfängt sämtliche Daten der Connectors, bearbeitet leitet diese an die entsprechenden Actoren. Hierfür müssen unter Umständen eine Vielzahl von gleichzeitigen Netzwerkverbindungen etabliert werden. Dieses Szenario lässt sich mit dem ebenfalls für Ruby entwickelten Framework Eventmachine abbilden. Es wurde dafür konzipiert eine große Anzahl an gleichzeitigen I/Os zu verarbeiten ohne das ganze System zu blockieren. Dieses Konzept wird ebenfalls unter anderem in Twisted für Python oder Node.js für Javascript genutzt. Besonders im Brain kann Ruby seine stärken ausspielen, da die Beschreibung des Routings in einer Domänspezifischen Sprache abgebildet wird. Des Weiteren kommen Bilbiotheken im Umgang mit JSON, XML hinzu. Die Actors werden ebenfalls via TCP/IP kontaktiert. 
+Das Brain bildet die zentrale Instanz des Backends. Es empfängt sämtliche Daten der Connectors, bearbeitet leitet diese an die entsprechenden Actoren. Hierfür müssen unter Umständen eine Vielzahl von gleichzeitigen Netzwerkverbindungen etabliert werden. Dieses Szenario lässt sich mit dem ebenfalls für Ruby entwickelten Framework Eventmachine abbilden. Es wurde dafür konzipiert eine große Anzahl an gleichzeitigen I/Os zu verarbeiten ohne das ganze System zu blockieren. Dieses Konzept wird ebenfalls unter anderem in Twisted für Python oder Node.js für Javascript genutzt. Besonders im Brain kann Ruby seine stärken ausspielen, da die Beschreibung des Routings in einer domänspezifischen Sprache abgebildet wird. Des Weiteren kommen Bilbiotheken im Umgang mit JSON, XML hinzu. Die Actors werden ebenfalls via TCP/IP kontaktiert. 
 
 \subsection{Actor} 
 Wie im Falle des Connectors, ist der Actor selbst eher schmal gehalten. Dieser empfäng ebenfalls via Eventmachine die relevanten und konvertierten Teile der Konfiguration und schickt diese Informationen an die anschließenden Systeme. Bei der Beispielimplementierung wird hierfür ein Arduino eingesetzt. 
