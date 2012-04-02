@@ -39,7 +39,7 @@ Des Weiteren ist die Strukturierung und Organisation der Daten elementar für di
 Im folgenden werden all die angesprochenen Strukturierungen in den einzelnen Abschnitten geklärt. Als Strategie wird die des Bottom-Up verfolgt, wobei mit den elementarsten Bestandteilen angefangen wird. 
 
 \subsection{Attribute und ihre Typen}
-Wie bereits angesprochen sind Attribute die kleinsten Einheit der Repräsentation von Konfigurationswerten. Dies ist notwendig, da beispielsweise Temperaturen andere Werte annehmen können, als eine Sammlung von unterschiedlichsten Radiosendern für das Autoradio. Dies bietet auch einen guten Einstieg in die Unterscheidung der einzelnen Typen. Damit einzelne Typen exakt zugeordnet werden, gehören diese immer zu einem Attribut. Diese Überlegung ist logisch und repräsentiert die bekannten Meachnismen, welche wir beispielsweise aus der Programmierung kennen, so kann das gezeigte Beispiel folgendermaßen interpretiert werden\footnote{Die hier gezeigte Syntax soll lediglich als Pseudocode dienen und nicht als festes format dienen.}:
+Wie bereits angesprochen sind Attribute die kleinsten Einheit der Repräsentation von Konfigurationswerten. Dies ist notwendig, da beispielsweise Temperaturen andere Werte annehmen können, als eine Sammlung von unterschiedlichsten Radiosendern für das Autoradio. Dies bietet auch einen guten Einstieg in die Unterscheidung der einzelnen Typen. Damit einzelne Typen exakt zugeordnet werden, gehören diese immer zu einem Attribut. Diese Überlegung ist logisch und repräsentiert die bekannten Mechanismen, welche wir beispielsweise aus der Programmierung kennen, so kann das gezeigte Beispiel folgendermaßen interpretiert werden\footnote{Die hier gezeigte Syntax soll lediglich als Pseudocode dienen und nicht als festes format dienen.}:
 \lstset{language=bash}
 \begin{lstlisting}[caption=Zuweisung eines Attributs als Pseudocode , captionpos=b]
    x = 2
@@ -49,7 +49,7 @@ Wie bereits angesprochen sind Attribute die kleinsten Einheit der Repräsentatio
 
 So wäre im Falle einer Konfiguration x ein Attribut mit dem Wert 2, wobei es sich offensichtlich hier um eine Ziffer und letztendlich eine Zahl handelt. Zunächst müssen Attribute eindeutig sein und können einmalig deklariert werden. 
 \\\\
-Spannender ist die Frage welche Typen notwendig für die  Speicherung und Verarbeitung einer Konfiguration notwendig sind. Besonders Informatikern sind die Probleme bekannt, dass Datenstrukturen schnell komplex und unüberschaubar sind. Diesen Phänomen sollte vorgebeugt werden, sodass einfache Strukturen vorherrschen müssen. 
+Spannender ist die Frage welche Typen notwendig für die Speicherung und Verarbeitung einer Konfiguration notwendig sind. Besonders Informatikern sind die Probleme bekannt, dass Datenstrukturen schnell komplex und unüberschaubar sind. Diesen Phänomen sollte vorgebeugt werden, sodass einfache Strukturen vorherrschen müssen. 
 \\\\
 Die Überlegung zwischen Raumtemperaturen und Fernsehsendern geben erste Hinweise auf notwendige Elementartypen. So sollte eine Temperatur als eine Fließkommazahl und ein Fernsehsender mit Hilfe dessen Namens, sprich einem Text definiert werden. Zahlen sollten ebenfalls als ganze definiert werden können. So sind schon komplexere Beispiele vorstellbar:
 \lstset{language=bash}
@@ -60,7 +60,7 @@ Die Überlegung zwischen Raumtemperaturen und Fernsehsendern geben erste Hinweis
 \end{lstlisting}
 
 
-Das letzte Listing zeigt bereits eine neue Klasse von Problemen, so ist die Sammlung einzelner Attribute, welche inhaltlich zum selben Kontext kompliziert. Die Einführung von Namenskonventionen zur Sammlung von Attributen, welche zu einer Domäne gehören, wären eine mögliche Lösung. Bei der Möglichkeit von wohl hunderten Radio- und Fernsehsendern, wird schnell klar, dass eine Unübersichtlichkeit garantiert ist. 	Als Konsequenz sollten Elementartypen in der Lage sein gesammelt zu werden. Im Endeffekt beschreibt dieser Mechanismus eine Liste, so ist:
+Das letzte Listing zeigt bereits eine neue Klasse von Problemen, so ist die Sammlung einzelner Attribute, welche inhaltlich zum selben Kontext kompliziert. Die Einführung von Namenskonventionen zur Sammlung von Attributen, welche zu einer Domäne gehören, wären eine mögliche Lösung. Bei der Möglichkeit von wohl hunderten Radio- und Fernsehsendern, wird schnell klar, dass eine Unübersichtlichkeit garantiert ist. Als Konsequenz sollten Elementartypen in der Lage sein gesammelt zu werden. Im Endeffekt beschreibt dieser Mechanismus eine Liste, so ist:
 
 \lstset{language=bash}
 \begin{lstlisting}[caption=Sammlung mehrerer Attribute in einer Liste, captionpos=b]
@@ -94,7 +94,7 @@ Der nächste Abschnitt wird sich mit einem übergeordneten Konzept, der Sammlung
 Mit der Einführung von Attributen und deren Typen ist es grundlegend möglich zunächst die notwendigen Werte einer Konfiguration zu speichern. Jedoch wird man bei diesem Konzept mit einer weiteren Klasse von Problemen konfrontiert, die im folgenden Listing gezeigt werden sollen:
 \lstset{language=bash}
 \begin{lstlisting}[caption=Attributssammlung ohne Sektionen, captionpos=b]
-  temperatur_wohnzimmer = 21
+  	temperatur_wohnzimmer = 21
 	temperatur_badezimmer = 23
 	radiosender_badezimmer = ["Fritz", "Radio1", "InfoRadio"]
 	tvsender_wohnzimmer = ["BBC", "Phoenix"]
@@ -161,7 +161,7 @@ Sektionen bieten neben der Klassifizierung von Attributen einen weiteren Vorteil
 
 \lstset{language=bash}
 \begin{lstlisting}[caption=Sammlung von Attributen ohne Polymorphie, captionpos=b]
-  wohnzimmer_temperatur = 21
+  	wohnzimmer_temperatur = 21
 	badezimmer_temperatur = 22
 \end{lstlisting}
 
@@ -282,10 +282,10 @@ Eine Entscheidung für ein Format bringt immer Tücken mit sich und es müssen v
 Als letzter Teil dieses Kapitels, sollen mögliche Erweiterungen und Konzepte von Konfigurationsdateien beschrieben werden. Diese Mechanismen hängen nicht nur von dem Format selbst, sondern auch anderen Systemen innerhalb der Konfigurationsbearbeitung ab. 
 
 \subsection{Echtzeit-Änderungen}
-Im Laufe dieses Kapitels wurden Konfigurationen als ein reines statisches Konstrukt betrachtet. Zwar wird eine gewisse Dynamik durch die Einführung von Sektionen, Polymorphie und Ableitungen impliziert, dennoch muss die Konfiguration immer als ganzes Übertragen werden. Diese beschreibt so vollständig wie möglich die Wünsche der Nutzers für eine komplette Umgebung. Haben sich lediglich einzelne Teile geändert, müssen diese dennoch komplett übertragen werden. Dies erzeugt Redundanzen und unnötigen Traffic innerhalb der Systeme. Es ist sich leicht vorzustellen wie schnell die Komponenten verwirrt sein könnten. Des Weiteren ist beispielsweise die Raumtemperatur kein Manifest, dass während der Gesamtnutzung der Umgebung unveränderbar ist. Bedürfnisse ändern sich, sei es die Innentemperatur oder der Radiosender, welcher gerade ausgewählt wurde. Einzelne Eigenschaften sollen und müssen in Echtzeit geändert werden. Die bedeutet, dass als Erweiterung jederzeit partielle Ausschnitte der Konfiguration geändert und übertragen werden können ohne das Neuladen der kompletten Konfiguration und dessen Zusammenhang der Umgebung zu provozieren.
+Im Laufe dieses Kapitels wurden Konfigurationen als ein reines statisches Konstrukt betrachtet. Zwar wird eine gewisse Dynamik durch die Einführung von Sektionen, Polymorphie und Ableitungen impliziert, dennoch muss die Konfiguration immer als ganzes Übertragen werden. Diese beschreibt so, vollständig wie möglich die Wünsche der Nutzers für eine komplette Umgebung. Haben sich lediglich einzelne Teile geändert, müssen diese dennoch komplett übertragen werden. Dies erzeugt Redundanzen und unnötigen Traffic innerhalb der Systeme. Es ist sich leicht vorzustellen wie schnell die Komponenten verwirrt sein könnten. Des Weiteren ist beispielsweise die Raumtemperatur kein Manifest, dass während der Gesamtnutzung der Umgebung unveränderbar ist. Bedürfnisse ändern sich, sei es die Innentemperatur oder der Radiosender, welcher gerade ausgewählt wurde. Einzelne Eigenschaften sollen und müssen in Echtzeit geändert werden. Die bedeutet, dass als Erweiterung jederzeit partielle Ausschnitte der Konfiguration geändert und übertragen werden können ohne das Neuladen der kompletten Konfiguration und dessen Zusammenhang der Umgebung zu provozieren.
 
 \subsection{Vorhersagen}
-Eine zweite mögliche Erweiterung ist die Vorhersage von möglichen Konfigurationen, ähnlich der Produktempfehlungen bei großen Onlinekaufhäusern. Umgebungen sind dadurch definiert, dass sie sich Eigenschaften teilen auch wenn sie unterschiedlich sind, jedoch ändern sich diese auch nach Art der Umgebung. So sind Sitzpositionen innerhalb von Autos abhängig vom Fahrzeugtyp dem eigentlichen Sitz et cetera. Durch selbstlernende Algorithmen und eine entsprechend große Datenbasis wäre es möglich den Nutzern Konfigurationsempfehlungen auszusprechen auf Basis der Kenntnisse über das eigene und fremde Profile. Vorhersagen ersparen aufwändige Neukonfigurationen und können besonders Aspekte auf Sicherheit und andere wichtige Themen legen. Eines der Kernprobleme in diesem Feld ist, dass die Algorithmen sich auf eine relativ große Datenbasis verlassen. Hier entstehen Fragen darüber wie sich die Datenbasis generiert, wenn jeder Nutzer die Konfigurationen auf seinen Smartphone speichert. Gibt es in diesem Falle nur den Weg über die Cloud oder könnte die Umgebung selbst als Datenvermittler und Wissensspeichen. Ausserdem stellen sich Fragen zum Datenschutz und der Datenintegrität. 
+Eine zweite mögliche Erweiterung ist die Vorhersage von möglichen Konfigurationen, ähnlich der Produktempfehlungen bei großen Onlinekaufhäusern. Umgebungen sind dadurch definiert, dass sie sich Eigenschaften teilen auch wenn sie unterschiedlich sind, jedoch ändern sich diese auch nach Art der Umgebung. So sind Sitzpositionen innerhalb von Autos abhängig vom Fahrzeugtyp dem eigentlichen Sitz et cetera. Durch selbstlernende Algorithmen und eine entsprechend große Datenbasis wäre es möglich den Nutzern Konfigurationsempfehlungen auszusprechen auf Basis der Kenntnisse über das eigene und fremde Profile. Vorhersagen ersparen aufwändige Neukonfigurationen und können besonders Aspekte auf Sicherheit und andere wichtige Themen legen. Eines der Kernprobleme in diesem Feld ist, dass die Algorithmen sich auf eine relativ große Datenbasis verlassen. Hier entstehen Fragen darüber wie sich die Datenbasis generiert, wenn jeder Nutzer die Konfigurationen auf seinen Smartphone speichert. Gibt es in diesem Falle nur den Weg über die Cloud oder könnte die Umgebung selbst als Datenvermittler und Wissensspeichen dienen. Ausserdem stellen sich Fragen zum Datenschutz und der Datenintegrität. 
 
 \subsection{Smart-Environments}
 Ausgehend von den Vorhersagen zu neuen Profilen und der Intention, dass Systeme in der Lage sind zu lernen, welche Einstellungen Nutzer treffen, kann dieser Effekt auch auf der anderen Seite genutzt werden. Das Stichwort hier, sind Smart-Environments, wenn sich bestimmte Muster finden lassen, beispielsweise wann das Licht ausgeschaltet wird. Ressourcen können intelligent geplant und eingeteilt werden. Die Möglichkeiten sind vielfältig und können besonders zur Energie- und Kosteneinsparungen genutzt werden.
