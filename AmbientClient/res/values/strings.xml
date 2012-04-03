@@ -5,21 +5,39 @@
     <string name="app_name">AmbientClient</string>
     <string name="title_registration">Registrierung</string>
     <string name="title_main_activity">Umgebungsübersicht</string>
+    <string name="title_general_ambient_activity">Allgemeine Konfiguration</string>
+    <string name="title_new_ambient_activity">Neue Umgebung</string>
     
     
     
     <string name="txt_light">Licht</string>
+    <string name="txt_light_red">Rotes Licht</string>
+    <string name="txt_light_green">Grünes Licht</string>
+    <string name="txt_light_blue">Blaues Licht</string>
     <string name="txt_temperature">Temperatur</string>
+    <string name="txt_ambient_name">Name der Umgebung</string>
+    <string name="txt_phone">Telefonnummer</string>
 
     <string name="txt_enable_bluetooth">Bitte schalten Sie ihr Bluetooth ein, sonst kann die App nicht Ordnungsgemäß benutzt werden.</string>
 
-
+	<string name="txt_select_ambient">Bitte wähle deine Umgebung aus.</string>
+	<string name="txt_select_room">Raumauswahl</string>
     
     <string name="button_save_config">Konfiguration anlegen</string>
+    <string name="button_update_config">Konfiguration aktualisieren</string>
     <string name="button_save">Speichern</string>
     <string name="button_cancel">Abbrechen</string>
 
     <string name="button_ok">Ok</string>
+    
+    
+    <string name="menu_add_ambient">Neue Umgebung</string>
+    <string name="menu_general_ambient">Allgemeine Konfiguration</string>
+    <string name="menu_delete_ambient">Löschen</string>
 
+    <string name="ambient_car">Auto</string>
+    <string name="ambient_home">Hotel</string>
+    <string name="ambient_living_room">Wohnzimmer</string>
+    <string name="ambient_bedroom">Schlafzimmer</string>
     
 </resources>

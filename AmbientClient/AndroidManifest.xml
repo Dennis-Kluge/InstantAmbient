@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="android.ambientclient"
+    package="instantambeint.ambientclient"
     android:versionCode="1"
     android:versionName="1.0" >
 
@@ -10,23 +10,44 @@
 
     <application
         android:icon="@drawable/ic_launcher"
-        android:label="@string/app_name" android:name="App">
-        <activity
-            android:name=".activities.Registration"
+        android:label="@string/app_name" android:name="instantambient.ambientclient.App">
+        <!-- activity
+            android:name="instantambient.ambientclient.activities.Registration"
             android:label="@string/title_registration" android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+        </activity-->
+        <activity
+            android:name="instantambient.ambientclient.activities.MainActivity"
+
+            android:screenOrientation="portrait">
+
         </activity>
         <activity
-            android:name=".activities.MainActivity"
+            android:name="instantambient.ambientclient.activities.GeneralAmbientActivity"
+			 android:screenOrientation="portrait">
+			 <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
 
-            android:label="@string/title_main_activity" android:screenOrientation="portrait">
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name="instantambient.ambientclient.activities.RoomAmbientActivity"
+
+            android:screenOrientation="portrait">
 
         </activity>
-        <service android:name=".service.BluetoothService"></service>
+         <activity
+            android:name="instantambient.ambientclient.activities.AmbientActivity"
+
+             android:screenOrientation="portrait">
+
+        </activity>
+        <service android:name="instantambient.ambientclient.service.BluetoothService"></service>
     </application>
 
 </manifest>
