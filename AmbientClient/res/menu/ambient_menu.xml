@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android" >
+    
+     <item
+        android:id="@+id/add_ambient"
+        android:title="@string/menu_add_ambient">
+    </item>
+  
+</menu>

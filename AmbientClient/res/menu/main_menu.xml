@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android" >
+    
+      <item
+        android:id="@+id/add_ambient"
+        android:title="@string/menu_add_ambient">
+    </item>
+     <!-- android:icon="@drawable/ic_menu_refresh" -->
+    <item
+        android:id="@+id/general_ambient"
+        android:title="@string/menu_general_ambient">
+    </item>
+
+</menu>

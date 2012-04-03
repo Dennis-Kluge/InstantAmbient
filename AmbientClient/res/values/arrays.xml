@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="roomambients">
+        <item>Wohnzimmer</item>
+        <item>Schlafzimmer</item>
+    </string-array>
+</resources>
