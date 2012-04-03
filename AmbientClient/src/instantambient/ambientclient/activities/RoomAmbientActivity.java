@@ -311,6 +311,7 @@ public class RoomAmbientActivity extends Activity {
 		            			default:
 		            				break;
 		            			}
+		                		
 	                		}
 	                	} else {
 	                		NumberPicker lightPicker = (NumberPicker)layout.getChildAt(0);

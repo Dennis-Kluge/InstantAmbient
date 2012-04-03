@@ -153,7 +153,7 @@ public class RoomAmbientDB {
 			db.beginTransaction();
 			SQLiteStatement stmt = db.compileStatement(RoomAmbientDB.INSERT_SQL);
 			stmt.clearBindings();
-			if(ra.ambientName != null)stmt.bindString(1, ra.ambientName + ra.refAmbiendId);
+			if(ra.ambientName != null)stmt.bindString(1, ra.ambientName);
 			stmt.bindDouble(2, ra.temperature);
 			stmt.bindLong(3, ra.light);
 			stmt.bindDouble(4, ra.redLight);
@@ -229,7 +229,7 @@ public class RoomAmbientDB {
 			for (int n = 0; n < raList.size(); n++) {
 				RoomAmbientDB u = raList.get(n);
 				stmt.clearBindings();
-				stmt.bindString(9, u.ambientId);
+				stmt.bindString(9, u.ambientName);
 				stmt.bindDouble(1, u.temperature);
 				stmt.bindLong(2, u.light);
 				stmt.bindDouble(3, u.redLight);

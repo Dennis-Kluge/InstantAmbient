@@ -122,7 +122,7 @@ public class AmbientActivity extends Activity {
 	protected void onResume() {
 		ArrayList<RoomAmbientDB> data =  new ArrayList<RoomAmbientDB>();
 		for (RoomAmbientDB ra : AmbientData.getInstance().getRoomAmbients()){
-			if(ra.getRefAmbiendId() != null && ra.getRefAmbiendId().contains(roomId)) {
+			if(ra.getRefAmbiendId() != null && ra.getRefAmbiendId().equals(roomId)) {
 				data.add(ra);
 			}
 		}
