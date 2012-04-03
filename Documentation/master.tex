@@ -28,7 +28,6 @@
 
 
 % Bibtex
-%\usepackage{natbib}
 \usepackage{biblatex}
 \bibliography{bibliography.bib}
 \usepackage{amsrefs}
@@ -48,33 +47,26 @@
 	pdftitle={NFC basierte Konfiguration von Lebens- und Arbeitsumgebung},
 	pdfauthor={Swen Hutop, Dennis Kluge},
 	pdfsubject={Forschungsprojekt},
-	pdfproducer={our mac}, % producer of the document
+	pdfproducer={Mac OS X with PDFLatex}, % producer of the document
 	pdfkeywords={Auto} {Heim} {Automatisierung}, % list of keywords
 }
 
-% Glossar
-%\usepackage{glossaries}
-%\makeglossaries
-
 % für Bilder
 \usepackage{graphicx}
-
-% index
-%\usepackage{makeidx}
-%\makeindex
 
 \begin{document}
 
 \title{NFC basierte Konfiguration von Lebens- und Arbeitsumgebung}
 \author{Swen Hutop, Dennis Kluge}
 
-%\pagenumbering{Roman}
+% Deckblatt
+\include{title}
 
-% Deckblatte
-\input{title}
 
+\setcounter{page}{1}
 % Inhaltsverzeichnis
 \tableofcontents
+
 
 
 \newpage
